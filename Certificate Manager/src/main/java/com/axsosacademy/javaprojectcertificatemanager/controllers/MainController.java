@@ -9,6 +9,11 @@ public class MainController {
 
     @GetMapping("/")
     public String index() {
-        return "index";
+        return "login";
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "admindashboard";
     }
 }
