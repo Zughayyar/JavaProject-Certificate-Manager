@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add financial</title>
+    <link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+</head>
+<body>
+        <!-- Header Section -->
+        <header class="header">
+            <div class="left">
+                <img
+                    src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png"
+                    alt="Site logo">
+            </div>
+            <div class="right">
+                <span>Name</span>
+                <img
+                    src="https://cdn-icons-png.freepik.com/512/10813/10813375.png"
+                    alt="User icon">
+            </div>
+        </header>
+     
+        <!-- Sidebar Section -->
+        <aside class="sidebar">
+            <a href="#" >
+                <i class="fas fa-tachometer-alt"></i>
+                Dashboard
+            </a>
+            <a href="#" >
+                <i class="fas fa-chalkboard-teacher"></i>
+                Teachers
+            </a>
+            <a href="#">
+                <i class="fas fa-user-graduate"></i>
+                Students
+            </a>
+            <a href="#" class="active">
+                <i class="fas fa-file-invoice-dollar"></i>
+                financials
+            </a>
+            <a href="#">
+                <i class="fas fa-laptop-code"></i>
+                Bootcamp
+            </a>
+            <a href="#">
+                <i class="fas fa-check-square"></i>
+                Certificate
+            </a>
+            <a class="logout"href="#">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>        
+        </aside>
+     
+        <main class="content">
+     
+    <div class="container">
+        <div class="form-container">
+            <h1>Add Bootcamp</h1>
+            <form>
+                <label for="bootcamp-name">Bootcamp Name</label>
+                <input type="text" id="bootcamp-name" name="bootcamp-name" placeholder="bootcamp name">
+
+                <label for="Start">Start</label>
+                <input type="date" id="Start" name="Start" placeholder="Start">
+                
+                <label for="end">End</label>
+                <input type="date" id="end" name="end">
+               
+                <label for="descreiption">Descreiption</label>
+                <textarea name="descreiption" id="descreiption"></textarea>
+                <br>
+                <input id="submit" type="submit" value="Submit">
+            </form>
+        </div>
+        <div class="table-container">
+            <label>All financials</label>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bootcamp</th>
+                        <th>Descreiption</th>
+                        <th>Start</th>
+                        <th>End</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>on-site</td>
+                        <td>Web-Fundemuntels,Python,Java,Mern</td>
+                        <td>9/23/2024</td>
+                        <td>2/23/2025</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </main>
+</body>
+</html>
