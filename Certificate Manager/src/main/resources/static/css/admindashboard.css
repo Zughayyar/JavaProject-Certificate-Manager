@@ -3,7 +3,6 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     color: #333;
-    overflow: hidden;
 }
 
 .header {
@@ -54,8 +53,15 @@ body {
     color: white;
     height: 100vh;
     padding-top: 20px;
+    padding-bottom: 20px; 
     position: fixed;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-links {
+    flex-grow: 1;
 }
 
 .sidebar a {
@@ -84,6 +90,28 @@ body {
 .sidebar a i {
     margin-right: 10px;
 }
+
+.sidebar .logout {
+    margin-top: 250%;
+    display: block;
+    color: white;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: background-color 0.3s, border-left 0.3s;
+}
+
+.sidebar .logout:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 3px solid #ffffff;
+}
+
+.sidebar .logout i {
+    margin-right: 10px;
+}
+
 
 .content {
     margin-left: 220px; 
