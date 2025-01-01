@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -59,6 +60,10 @@ public class User {
     @JoinColumn(name = "department_id")
     private Department department;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Approval> approvalList;
+
+
     // Constructors
     public User() {
     }
@@ -108,6 +113,10 @@ public class User {
         return department;
     }
 
+    public List<Approval> getApprovalList() {
+        return approvalList;
+    }
+
     // Setters
 
     public void setFirstName(String firstName) {
@@ -128,5 +137,9 @@ public class User {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public void setApprovalList(List<Approval> approvalList) {
+        this.approvalList = approvalList;
     }
 }
