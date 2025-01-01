@@ -14,11 +14,7 @@ public class MainController {
 
     @GetMapping("/dashboard")
     public String dashboard() {
-        return "admindashboard";
+        return "adminDashboard";
     }
 
-    @GetMapping("/anasTEST")
-    public String anasTEST() {
-        return "anasTEST";
-    }
 }
