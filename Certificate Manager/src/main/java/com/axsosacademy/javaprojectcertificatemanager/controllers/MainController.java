@@ -12,9 +12,19 @@ public class MainController {
         return "login";
     }
 
-    @GetMapping("/dashboard")
+    @GetMapping("/adminDashboard")
     public String dashboard() {
         return "adminDashboard";
+    }
+
+    @GetMapping("/bootcampDashboard")
+    public String bootcampDashboard() {
+        return "bootcampDashboard";
+    }
+
+    @GetMapping("teacherDashboard")
+    public String teacherDashboard() {
+        return "teacherDashboard";
     }
 
 }
