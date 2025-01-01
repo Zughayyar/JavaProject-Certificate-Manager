@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Teacher</title>
+    <link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+        <!-- Header Section -->
+        <header class="header">
+            <div class="left">
+                <img
+                    src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png"
+                    alt="Site logo">
+            </div>
+            <div class="right">
+                <span>Name</span>
+                <img
+                    src="https://cdn-icons-png.freepik.com/512/10813/10813375.png"
+                    alt="User icon">
+            </div>
+        </header>
+     
+        <!-- Sidebar Section -->
+        <aside class="sidebar">
+            <a href="#" >
+                <i class="fas fa-tachometer-alt"></i>
+                Dashboard
+            </a>
+            <a href="#" class="active">
+                <i class="fas fa-chalkboard-teacher"></i>
+                Teachers
+            </a>
+            <a href="#">
+                <i class="fas fa-user-graduate"></i>
+                Students
+            </a>
+            <a href="#">
+                <i class="fas fa-file-invoice-dollar"></i>
+                financials
+            </a>
+            <a href="#">
+                <i class="fas fa-laptop-code"></i>
+                Bootcamp
+            </a>
+            <a href="#">
+                <i class="fas fa-check-square"></i>
+                Certificate
+            </a>
+            <a class="logout"href="#">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>        
+        </aside>
+     
+        <main class="content">
+     
+    <div class="container">
+        <div class="form-container">
+            <h1>Add Teacher</h1>
+            <form>
+                <label for="first-name">First name</label>
+                <input type="text" id="first-name" name="first-name" placeholder="first name">
+                
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last-name" placeholder="last name">
+                
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" placeholder="Email">
+
+                <label for="phoneNumber">Phone number</label>
+                <input type="text" id="email" name="email" placeholder="Phone number">
+                
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password">
+                
+                <input id="submit" type="submit" value="Submit">
+            </form>
+        </div>
+        <div class="table-container">
+            <label>All Teachers</label>
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Mobile Number</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>anas</td>
+                        <td>zughayyar</td>
+                        <td>anas@axsos.com</td>
+                        <td>0596005000</td>
+                        <td><a href="">Edit</a> || <a href="">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </main>
+</body>
+</html>
