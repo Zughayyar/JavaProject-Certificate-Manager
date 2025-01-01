@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/teacherdashboard.css">
+    <style>
+
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="left">
+            <img src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png" alt="Site logo">
+        </div>
+        <div class="right">
+            <span>Name</span>
+            <img src="https://cdn-icons-png.freepik.com/512/10813/10813375.png" alt="User icon">
+        </div>
+    </header>
+
+    <!-- Sidebar Section -->
+    <aside class="sidebar">
+        <a href="#" class="active">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+        </a>
+        <div class="dropdown">
+            <button class="dropbtn">
+                <i class="fas fa-chevron-down"></i> Bootcamps
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Full-Stack Onsite</a>
+                <a href="#">Full-Stack Part-time</a>
+                <a href="#">QA Part-time</a>
+            </div>
+        </div>
+        <a class="logout"href="#">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+        </a>        
+    </aside>
+
+    <!-- Main Content Section -->
+    <div class="content">
+        <h1>
+            Bootcamp <span class="highlight">Details</span>
+        </h1>
+        <h2>All Students</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Students</th>
+                        <th>Stack1</th>
+                        <th>Stack2</th>
+                        <th>Stack3</th>
+                        <th>Stack4</th>
+                        <th>Oral Exam</th>
+                        <th>Overall Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Anas</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="overall-status">not pass</td>
+                    </tr>
+                    <tr>
+                        <td>Ali</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="overall-status">not pass</td>
+                    </tr>
+                    <tr>
+                        <td>Sami</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
+                        <td class="overall-status">not pass</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button id="Confirm" disabled class="Confirm">Apply Changes</button>
+    </div>
+    <script src="js/teacherdashboard.js"></script>
+
+</body>
+</html>
