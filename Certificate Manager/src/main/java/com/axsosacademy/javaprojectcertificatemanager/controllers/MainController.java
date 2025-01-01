@@ -19,7 +19,7 @@ public class MainController {
 
     @GetMapping("/bootcampDashboard")
     public String bootcampDashboard() {
-        return "bootcampDashboard";
+        return "accountantDashboard";
     }
 
     @GetMapping("teacherDashboard")
