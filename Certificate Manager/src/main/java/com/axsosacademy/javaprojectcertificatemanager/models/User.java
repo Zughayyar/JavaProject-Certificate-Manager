@@ -38,6 +38,10 @@ public class User {
     @NotEmpty(message="Confirm Password is required!")
     private String confirmPassword;
 
+    @NotEmpty(message = "Phone Number is required")
+    @Size(min=10, max=10, message="Phone Number Must be 10 numbers")
+    private String phoneNumber;
+
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
@@ -60,7 +64,7 @@ public class User {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "approvedBy", fetch = FetchType.LAZY)
     private List<Approval> approvalList;
 
 
