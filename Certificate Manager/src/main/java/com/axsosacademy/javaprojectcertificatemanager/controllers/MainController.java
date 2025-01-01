@@ -16,4 +16,9 @@ public class MainController {
     public String dashboard() {
         return "admindashboard";
     }
+
+    @GetMapping("/anasTEST")
+    public String anasTEST() {
+        return "anasTEST";
+    }
 }

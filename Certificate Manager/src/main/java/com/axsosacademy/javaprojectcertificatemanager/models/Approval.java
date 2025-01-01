@@ -34,7 +34,7 @@ public class Approval {
     // Relations
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User apporvedBy;
+    private User approvedBy;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "certificate_id")
@@ -47,7 +47,7 @@ public class Approval {
 
     public Approval(boolean approvalStatus, User user, Certificate certificate) {
         this.approvalStatus = approvalStatus;
-        this.apporvedBy = user;
+        this.approvedBy = user;
         this.certificate = certificate;
     }
 
@@ -62,7 +62,7 @@ public class Approval {
     }
 
     public User getUser() {
-        return apporvedBy;
+        return approvedBy;
     }
 
     public Date getUpdatedAt() {
@@ -85,7 +85,7 @@ public class Approval {
     }
 
     public void setUser(User user) {
-        this.apporvedBy = user;
+        this.approvedBy = user;
     }
 
     public void setCertificate(Certificate certificate) {
