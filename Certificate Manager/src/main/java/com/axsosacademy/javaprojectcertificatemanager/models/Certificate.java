@@ -15,8 +15,6 @@ public class Certificate {
     private Long id;
 
     private String uniqueID;
-    private boolean isTeacherApproved;
-    private boolean isAccountApproved;
 
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -52,6 +50,8 @@ public class Certificate {
     )
     private List<Bootcamp> bootcamps;
 
+    @OneToMany(mappedBy = "certificate", fetch = FetchType.LAZY)
+    private List<Approval> approvalList;
     // Constructors
 
     public Certificate() {
@@ -64,14 +64,6 @@ public class Certificate {
 
     public String getUniqueID() {
         return uniqueID;
-    }
-
-    public boolean isTeacherApproved() {
-        return isTeacherApproved;
-    }
-
-    public boolean isAccountApproved() {
-        return isAccountApproved;
     }
 
     public Date getUpdatedAt() {
@@ -90,18 +82,14 @@ public class Certificate {
         return bootcamps;
     }
 
+    public List<Approval> getApprovalList() {
+        return approvalList;
+    }
+
     // Setters
 
     public void setUniqueID(String uniqueID) {
         this.uniqueID = uniqueID;
-    }
-
-    public void setTeacherApproved(boolean teacherApproved) {
-        isTeacherApproved = teacherApproved;
-    }
-
-    public void setAccountApproved(boolean accountApproved) {
-        isAccountApproved = accountApproved;
     }
 
     public void setStudents(List<Student> students) {
@@ -110,5 +98,9 @@ public class Certificate {
 
     public void setBootcamps(List<Bootcamp> bootcamps) {
         this.bootcamps = bootcamps;
+    }
+
+    public void setApprovalList(List<Approval> approvalList) {
+        this.approvalList = approvalList;
     }
 }
