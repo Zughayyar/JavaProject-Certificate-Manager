@@ -12,10 +12,13 @@ h1 {
     flex-wrap: wrap;
 }
 .form-container, .table-container {
-    border: 1px solid black;
+    border: 1px solid #ccc;
+    border-radius: 8px; 
     padding: 20px;
     margin: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.377); 
 }
+
 .form-container {
     flex: 1;
     min-width: 300px;
@@ -29,6 +32,7 @@ h1 {
     background-color: #691489;
     color: #f2f2f2;
 }
+
 
 
 label {
@@ -126,7 +130,7 @@ table {
     margin-top: 10px;
 }
 th, td {
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.322);
     padding: 8px;
     text-align: left;
     background-color: #ffffff;
