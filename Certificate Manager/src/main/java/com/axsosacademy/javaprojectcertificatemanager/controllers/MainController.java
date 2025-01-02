@@ -13,7 +13,7 @@ public class MainController {
         return "accountantDashboard";
     }
 
-    @GetMapping("teacherDashboard")
+    @GetMapping("/teacherDashboard")
     public String teacherDashboard() {
         return "teacherDashboard";
     }
