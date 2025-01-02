@@ -106,6 +106,12 @@ public class MainController {
         return "bootcamp_add_table";
     }
 
+    // Certificates Page
+    @GetMapping("/certificates")
+    public String certificates(Model model) {
+        return "certificate_add_table";
+    }
+
 
 
 
