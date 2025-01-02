@@ -59,15 +59,19 @@ public class AdminController {
     @PostMapping("/teachers/addTeacher")
     public String addTeacher(
             @Valid @ModelAttribute("newTeacher") User newTeacher,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            Model model
     ) {
+
         if (bindingResult.hasErrors()) {
+            List<User> teachers = departmentService.getAllTeachers();
+            model.addAttribute("teachers", teachers);
             return "teacher_add_table";
         }
         else {
             Department teacherDepartment = departmentService.getDepartmentById(2L);
             newTeacher.setDepartment(teacherDepartment);
-            userService.addUser(newTeacher);
+            userService.registerUser(newTeacher, bindingResult);
             return "redirect:/teachers";
         }
     }
@@ -93,15 +97,17 @@ public class AdminController {
     @PostMapping("/accountants/addAccountant")
     public String addAccountant(
             @Valid @ModelAttribute("newAccountant") User newAccountant,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            Model model
     ) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("accountants", departmentService.getAllAccountants());
             return "financial_add_table";
         }
         else {
             Department accountantDepartment = departmentService.getDepartmentById(3L);
             newAccountant.setDepartment(accountantDepartment);
-            userService.addUser(newAccountant);
+            userService.registerUser(newAccountant, bindingResult);
             return "redirect:/accountants";
         }
     }

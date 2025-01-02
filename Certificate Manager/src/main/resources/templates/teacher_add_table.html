@@ -1,97 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add Teacher</title>
-<link rel="icon"
-	href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png"
-	type="image/icon type">
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Add Teacher</title>
+	<link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-	<!-- Header Section -->
-	<header class="header">
-		<div class="left">
-			<img src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png"
-				alt="Site logo">
-		</div>
-		<div class="right">
-			<span th:text="${session.loggedUser.getFirstName()}"></span> <span
-				th:text="${session.loggedUser.getLastName()}"></span>
-			<div class="dropdown">
-				<img src="https://cdn-icons-png.freepik.com/512/10813/10813375.png"
-					alt="User icon">
-				<div class="dropdown-content">
-
-					<a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
-				</div>
+<!-- Header Section -->
+<header class="header">
+	<div class="left">
+		<img src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png" alt="Site logo">
+	</div>
+	<div class="right">
+		<span th:text="${session.loggedUser.firstName}"></span>
+		<span th:text="${session.loggedUser.lastName}"></span>
+		<div class="dropdown">
+			<img src="https://cdn-icons-png.freepik.com/512/10813/10813375.png" alt="User icon">
+			<div class="dropdown-content">
+				<a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
 			</div>
 		</div>
-	</header>
+	</div>
+</header>
 
-	<!-- Sidebar Section -->
-	<aside class="sidebar">
-		<a href="/adminDashboard"> <i class="fas fa-tachometer-alt"></i>
-			Dashboard
-		</a> <a href="/teachers" class="active"> <i
-			class="fas fa-chalkboard-teacher"></i> Teachers
-		</a> <a href="/students"> <i class="fas fa-user-graduate"></i>
-			Students
-		</a> <a href="/accountants"> <i class="fas fa-file-invoice-dollar"></i>
-			financials
-		</a> <a href="/bootcamps"> <i class="fas fa-laptop-code"></i> Bootcamp
-		</a> <a href="/certificates"> <i class="fas fa-check-square"></i>
-			Certificate
-		</a>
-	</aside>
+<!-- Sidebar Section -->
+<aside class="sidebar">
+	<a href="/adminDashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+	<a href="/teachers" class="active"><i class="fas fa-chalkboard-teacher"></i> Teachers</a>
+	<a href="/students"><i class="fas fa-user-graduate"></i> Students</a>
+	<a href="/accountants"><i class="fas fa-file-invoice-dollar"></i> Financials</a>
+	<a href="/bootcamps"><i class="fas fa-laptop-code"></i> Bootcamp</a>
+	<a href="/certificates"><i class="fas fa-check-square"></i> Certificate</a>
+</aside>
 
-	<main class="content">
+<!-- Main Content Section -->
+<main class="content">
+	<div class="container">
+		<div class="form-container">
+			<h1>Add Teacher</h1>
+			<form th:action="@{/teachers/addTeacher}" th:object="${newTeacher}" method="post">
+				<label for="first-name">First Name</label>
+				<input type="text" id="first-name" th:field="*{firstName}" placeholder="Enter First Name">
+				<ul>
+					<li th:each="err : ${#fields.errors('firstName')}" th:text="${err}" class="text-danger"></li>
+				</ul>
 
-		<div class="container">
-			<div class="form-container">
-				<h1>Add Teacher</h1>
-				<form action="#" th:action="@{/teachers/addTeacher}" th:object="${teachers}" method="post" >
-					<label for="first-name">First name</label> <input type="text"
-						id="first-name" th:field=*"{firstName}" placeholder="first name">
+				<label for="last-name">Last Name</label>
+				<input type="text" id="last-name" th:field="*{lastName}" placeholder="Enter Last Name">
 
-					<label for="lastName">Last Name</label> <input type="text"
-						id="last-name" th:field=*"{lastName}" placeholder="last name"> <label
-						for="email">Email</label> <input type="text" id="email"
-						name="email" placeholder="Email"> <label for="phoneNumber">Phone
-						number</label> <input type="text" id="email" th:field=*"{email}"
-						placeholder="Phone number"> <label for="password">Password</label>
-					<input type="password" id="password" th:field=*"{password}"
-						placeholder="Password"> 
-						<input id="submit" type="submit" value="Submit">
-				</form>
-			</div>
-			<div class="table-container">
-				<label>All Teachers</label>
-				<table>
-					<thead>
-						<tr>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th>Email</th>
-							<th>Mobile Number</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="teacher: ${teachers}">
-							<td th:text="${teacher.firstName}" />
-							<td th:text="${teacher.lastName}" />
-							<td th:text="${teacher.email}" />
-							<td th:text="${teacher.phoneNumber}" />
-							<td><a href="/teachers/edit/">Edit</a> || <a href="">Delete</a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+				<label for="email">Email</label>
+				<input type="email" id="email" th:field="*{email}" placeholder="Enter Email">
+
+				<label for="phoneNumber">Phone Number</label>
+				<input type="text" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Enter Phone Number">
+
+				<label for="password">Password</label>
+				<input type="password" id="password" th:field="*{password}" placeholder="Enter Password">
+
+				<label for="confirmPassword">Confirm Password</label>
+				<input type="password" id="confirmPassword" th:field="*{confirmPassword}" placeholder="Confirm Password">
+
+				<input id="submit" type="submit" value="Submit" class="btn btn-primary">
+			</form>
 		</div>
-	</main>
+
+		<div class="table-container">
+			<h2>All Teachers</h2>
+			<table class="table table-bordered table-hover">
+				<thead>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email</th>
+					<th>Phone Number</th>
+					<th>Actions</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="teacher : ${teachers}">
+					<td th:text="${teacher.firstName}"></td>
+					<td th:text="${teacher.lastName}"></td>
+					<td th:text="${teacher.email}"></td>
+					<td th:text="${teacher.phoneNumber}"></td>
+					<td>
+						<a th:href="@{/teachers/edit/{id}(id=${teacher.id})}" class="btn btn-info btn-sm">Edit</a>
+						<a th:href="@{/teachers/delete/{id}(id=${teacher.id})}" class="btn btn-danger btn-sm">Delete</a>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</main>
+
+<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="/js/script.js"></script>
 </body>
 </html>

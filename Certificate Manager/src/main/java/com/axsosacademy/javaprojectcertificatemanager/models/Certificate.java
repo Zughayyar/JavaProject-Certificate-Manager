@@ -52,6 +52,7 @@ public class Certificate {
 
     @OneToMany(mappedBy = "certificate", fetch = FetchType.LAZY)
     private List<Approval> approvalList;
+
     // Constructors
 
     public Certificate() {

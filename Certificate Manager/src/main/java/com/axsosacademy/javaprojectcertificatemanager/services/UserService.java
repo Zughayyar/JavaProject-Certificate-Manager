@@ -26,7 +26,7 @@ public class UserService {
     }
 
     // Register Method:
-    public User registerUser(User newUser, BindingResult bindingResult) {
+    public void registerUser(User newUser, BindingResult bindingResult) {
         Optional<User> potentialUser = userRepository.findByEmail(newUser.getEmail());
 
         // Check if email is already taken
@@ -39,15 +39,11 @@ public class UserService {
             bindingResult.rejectValue("confirmPassword", "Matches", "The Confirm Password must match Password!");
         }
 
-        // Return null if result has errors
-        if (bindingResult.hasErrors()) {
-            return null;
-        }
 
         // Hash and set password, save user to database
         String hashedPassword = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt());
         newUser.setPassword(hashedPassword);
-        return userRepository.save(newUser);
+        userRepository.save(newUser);
     }
 
     // Login User:

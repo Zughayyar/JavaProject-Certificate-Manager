@@ -121,6 +121,10 @@ public class User {
         return approvalList;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
     // Setters
 
     public void setFirstName(String firstName) {
