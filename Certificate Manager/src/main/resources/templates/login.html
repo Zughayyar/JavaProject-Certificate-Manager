@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
-    <!-- Header Section -->
     <header class="header">
         <img 
             src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png" alt="AXSOS Academy Logo" >
@@ -20,29 +19,32 @@
         </nav>
     </header>
 
-    <!-- Login Form Section -->
     <div class="container">
         <h1>Welcome to Certificate Manager!</h1>
-        <form action="#"  method="post" th:action="@{/loginUser}" th:object="${newLogin}" >
-            <!-- Email Field -->
+        <form action="#" method="post" th:action="@{/loginUser}" th:object="${newLogin}">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input id="email" type="email" placeholder="Email" th:field="*{email}">
+                <div th:if="${#fields.hasErrors('email')}" class="text-danger">
+                    <p th:each="err : ${#fields.errors('email')}" th:text="${err}"></p>
+                </div>
             </div>
-
-            <!-- Password Field -->
+    
             <div class="form-group">
                 <label for="password">Password</label>
                 <input id="password" type="password" placeholder="Password" th:field="*{password}">
                 <span class="forgot-password">
                     <a href="#">Forgot Password?</a>
                 </span>
+                <div th:if="${#fields.hasErrors('password')}" class="text-danger">
+                    <p th:each="err : ${#fields.errors('password')}" th:text="${err}"></p>
+                </div>
             </div>
-
-            <!-- Submit Button -->
+    
             <button class="btn" type="submit">Sign in</button>
         </form>
     </div>
+    
     <footer class="footer">
         <div class="footer-nav">
             <a href="https://axsos.academy">Axsos Academy</a>

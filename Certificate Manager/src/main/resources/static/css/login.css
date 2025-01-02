@@ -128,3 +128,6 @@ body {
     font-size: 14px;
     color: #691489;
 }
+.text-danger{
+    color: red;
+}

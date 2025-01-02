@@ -47,23 +47,40 @@
 				<ul>
 					<li th:each="err : ${#fields.errors('firstName')}" th:text="${err}" class="text-danger"></li>
 				</ul>
-
+			
 				<label for="last-name">Last Name</label>
 				<input type="text" id="last-name" th:field="*{lastName}" placeholder="Enter Last Name">
-
+				<ul>
+					<li th:each="err : ${#fields.errors('lastName')}" th:text="${err}" class="text-danger"></li>
+				</ul>
+			
 				<label for="email">Email</label>
 				<input type="email" id="email" th:field="*{email}" placeholder="Enter Email">
-
+				<ul>
+					<li th:each="err : ${#fields.errors('email')}" th:text="${err}" class="text-danger"></li>
+				</ul>
+			
 				<label for="phoneNumber">Phone Number</label>
 				<input type="text" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Enter Phone Number">
-
+				<ul>
+					<li th:each="err : ${#fields.errors('phoneNumber')}" th:text="${err}" class="text-danger"></li>
+				</ul>
+			
 				<label for="password">Password</label>
 				<input type="password" id="password" th:field="*{password}" placeholder="Enter Password">
-
+				<ul>
+					<li th:each="err : ${#fields.errors('password')}" th:text="${err}" class="text-danger"></li>
+				</ul>
+			
 				<label for="confirmPassword">Confirm Password</label>
 				<input type="password" id="confirmPassword" th:field="*{confirmPassword}" placeholder="Confirm Password">
-
+				<ul>
+					<li th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}" class="text-danger"></li>
+				</ul>
+			
 				<input id="submit" type="submit" value="Submit" class="btn btn-primary">
+			</form>
+			
 			</form>
 		</div>
 
