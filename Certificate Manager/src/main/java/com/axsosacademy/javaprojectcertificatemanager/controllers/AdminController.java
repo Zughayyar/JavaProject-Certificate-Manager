@@ -150,6 +150,7 @@ public class AdminController {
         return "student_edit";
     }
 
+
     // Bootcamp Add page
     @GetMapping("/bootcamps")
     public String bootcamps(Model model) {
