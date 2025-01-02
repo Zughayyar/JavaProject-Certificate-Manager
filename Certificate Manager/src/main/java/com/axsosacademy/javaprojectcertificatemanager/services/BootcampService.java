@@ -13,9 +13,14 @@ public class BootcampService {
         this.bootcampRepository = bootcampRepository;
     }
 
-
     // Get All Bootcamps
     public List<Bootcamp> getAllBootcamps() {
         return bootcampRepository.findAll();
     }
+
+    // Add New Bootcamp
+    public void addBootcamp(Bootcamp bootcamp) {
+        bootcampRepository.save(bootcamp);
+    }
+
 }
