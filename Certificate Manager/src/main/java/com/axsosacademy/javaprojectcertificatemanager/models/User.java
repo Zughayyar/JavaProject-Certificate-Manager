@@ -146,4 +146,12 @@ public class User {
     public void setApprovalList(List<Approval> approvalList) {
         this.approvalList = approvalList;
     }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }
