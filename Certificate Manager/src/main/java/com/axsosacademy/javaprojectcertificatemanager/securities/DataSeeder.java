@@ -31,7 +31,6 @@ public class DataSeeder {
                 User admin = new User();
                 admin.setEmail("admin@certmanager.com");
                 admin.setPassword(passwordEncoder.encode("qwer1234"));// Use BCrypt
-
                 Department adminDepartment = departmentRepository.findById(1L).orElse(null);
                 admin.setDepartment(adminDepartment);
                 admin.setFirstName("Admin");
