@@ -3,110 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add financial</title>
+    <title>Add Financial</title>
     <link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-        <!-- Header Section -->
-        <header class="header">
-            <div class="left">
-                <img
-                    src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png"
-                    alt="Site logo">
+<!-- Header Section -->
+<header class="header d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
+    <div class="left">
+        <img src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png" alt="Site logo">
+    </div>
+    <div class="right d-flex align-items-center">
+        <span th:text="${session.loggedUser.getFirstName()}"></span>
+        <span th:text="${session.loggedUser.getLastName()}"></span>
+        <div class="dropdown ms-3">
+            <img src="https://cdn-icons-png.freepik.com/512/10813/10813375.png" alt="User icon" style="width: 40px;">
+            <div class="dropdown-content">
+                <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
-            <div class="right">
-                <span th:text="${session.loggedUser.getFirstName()}"></span>
-            <span th:text="${session.loggedUser.getLastName()}"></span>                
-            <div class="dropdown">
-                    <img 
-                        src="https://cdn-icons-png.freepik.com/512/10813/10813375.png" 
-                        alt="User icon">
-                    <div class="dropdown-content">
-                        
-                        <a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
-                    </div>
-                </div>
-            </div>
-        </header>
-     
-        <!-- Sidebar Section -->
-        <aside class="sidebar">
-            <a href="/adminDashboard" >
-                <i class="fas fa-tachometer-alt"></i>
-                Dashboard
-            </a>
-            <a href="/teachers" >
-                <i class="fas fa-chalkboard-teacher"></i>
-                Teachers
-            </a>
-            <a href="/students">
-                <i class="fas fa-user-graduate"></i>
-                Students
-            </a>
-            <a href="/accountants" class="active">
-                <i class="fas fa-file-invoice-dollar"></i>
-                financials
-            </a>
-            <a href="/bootcamps">
-                <i class="fas fa-laptop-code"></i>
-                Bootcamp
-            </a>
-            <a href="/certificates">
-                <i class="fas fa-check-square"></i>
-                Certificate
-            </a>
-        </aside>
-     
-        <main class="content">
-     
-    <div class="container">
-        <div class="form-container">
-            <h1>Add financial</h1>
-            <form action="#" th:action="@{/accountants/addAccountant}" th:object="${accountants}" method="post">
-                <label for="firstName">First name</label>
-                <input type="text" id="first-name" th:field=*"{firstName}" placeholder="first name">
-                
-                <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" th:field=*"{lastName}" placeholder="last name">
-                
-                <label for="email">Email</label>
-                <input type="text" id="email" th:field=*"{email}" placeholder="Email">
+        </div>
+    </div>
+</header>
 
-                <label for="phoneNumber">Phone number</label>
-                <input type="text" id="email" th:field=*"{phoneNumber}" placeholder="Phone number">
-                
-                <label for="password">Password</label>
-                <input type="password" id="password" th:field=*"{password}" placeholder="Password">
-                
-                <input id="submit" type="submit" value="Submit">
+<!-- Sidebar Section -->
+<aside class="sidebar bg-dark text-white p-3">
+    <nav class="nav flex-column">
+        <a href="/adminDashboard" class="nav-link text-white"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="/teachers" class="nav-link text-white"><i class="fas fa-chalkboard-teacher"></i> Teachers</a>
+        <a href="/students" class="nav-link text-white"><i class="fas fa-user-graduate"></i> Students</a>
+        <a href="/accountants" class="nav-link active text-white"><i class="fas fa-file-invoice-dollar"></i> Financials</a>
+        <a href="/bootcamps" class="nav-link text-white"><i class="fas fa-laptop-code"></i> Bootcamp</a>
+        <a href="/certificates" class="nav-link text-white"><i class="fas fa-check-square"></i> Certificate</a>
+    </nav>
+</aside>
+
+<!-- Main Content -->
+<main class="content p-4">
+    <div class="container">
+        <!-- Form Section -->
+        <div class="form-container mb-5">
+            <h1>Add Financial</h1>
+            <form th:action="@{/accountants/addAccountant}" th:object="${newAccountant}" method="post">
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" id="firstName" th:field="*{firstName}" class="form-control" placeholder="First name">
+                    <div th:if="${#fields.hasErrors('firstName')}" class="text-danger" th:errors="*{firstName}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" id="lastName" th:field="*{lastName}" class="form-control" placeholder="Last name">
+                    <div th:if="${#fields.hasErrors('lastName')}" class="text-danger" th:errors="*{lastName}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" th:field="*{email}" class="form-control" placeholder="Email">
+                    <div th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="form-control" placeholder="Phone number">
+                    <div th:if="${#fields.hasErrors('phoneNumber')}" class="text-danger" th:errors="*{phoneNumber}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" th:field="*{password}" class="form-control" placeholder="Password">
+                    <div th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">confirm Password</label>
+                    <input type="password" id="confirmPassword" th:field="*{confirmPassword}" class="form-control" placeholder="Confirm Password">
+                    <div th:if="${#fields.hasErrors('confirmPassword')}" class="text-danger" th:errors="*{confirmPassword}"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
+
+        <!-- Table Section -->
         <div class="table-container">
-            <label>All financials</label>
-            <table>
-                <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Mobile Number</th>
-                        <th>Action</th>
-                    </tr>
+            <h2>All Financials</h2>
+            <table class="table table-bordered text-center">
+                <thead class="table-dark">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Mobile Number</th>
+                    <th>Actions</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="account: ${accountants}">
-							<td th:text="${account.firstName}" />
-							<td th:text="${account.lastName}" />
-							<td th:text="${account.email}" />
-							<td th:text="${account.phoneNumber}" />
-                        <td><a href="/accountants/edit">Edit</a> || <a href="">Delete</a></td>
-                    </tr>
+                <tr th:each="accountant : ${accountants}">
+                    <td th:text="${accountant.firstName}"></td>
+                    <td th:text="${accountant.lastName}"></td>
+                    <td th:text="${accountant.email}"></td>
+                    <td th:text="${accountant.phoneNumber}"></td>
+                    <td>
+                        <a th:href="@{/accountants/edit/{id}(id=${accountant.id})}" class="btn btn-warning btn-sm">Edit</a>
+                        <a th:href="@{/accountants/delete/{id}(id=${accountant.id})}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    </main>
+</main>
 </body>
 </html>
