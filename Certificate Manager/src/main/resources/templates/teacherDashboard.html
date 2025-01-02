@@ -17,8 +17,16 @@
             <img src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png" alt="Site logo">
         </div>
         <div class="right">
-            <span>Name</span>
-            <img src="https://cdn-icons-png.freepik.com/512/10813/10813375.png" alt="User icon">
+            <span th:text="${session.loggedUser.getFirstName()}"></span>
+            <div class="dropdownn">
+                <img 
+                    src="https://cdn-icons-png.freepik.com/512/10813/10813375.png" 
+                    alt="User icon">
+                <div class="dropdownn-content">
+                    
+                    <a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                </div>
+            </div>
         </div>
     </header>
 
