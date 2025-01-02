@@ -37,17 +37,89 @@ label {
 }
 input[type="text"], input[type="password"] {
     width: calc(100% - 20px);
-    padding: 5px;
+    padding: 10px;
     margin-top: 5px;
-    border: 1px solid black;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #691489;
+    box-shadow: 0 0 5px rgba(105, 20, 137, 0.5);
+    outline: none;
+}
+
 input[type="submit"] {
     margin-top: 20px;
-    padding: 5px 10px;
-    border: 1px solid black;
-    background-color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #691489;
+    color: #fff;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
+
+input[type="submit"]:hover {
+    background-color: #580f74;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+input[type="submit"]:active {
+    background-color: #450b59;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* General label styling */
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #292727;
+}
+
+/* Input date styling */
+input[type="date"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="date"]:focus {
+    border-color: #691489;
+    box-shadow: 0 0 5px rgba(105, 20, 137, 0.5);
+    outline: none;
+}
+
+textarea {
+    width: calc(100% - 20px);
+    height: 100px;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    resize: vertical;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+textarea:focus {
+    border-color: #691489;
+    box-shadow: 0 0 5px rgba(105, 20, 137, 0.5);
+    outline: none;
+}
+
+input[type="date"]:hover, textarea:hover {
+    border-color: #580f74;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
