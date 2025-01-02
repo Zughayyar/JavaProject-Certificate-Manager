@@ -20,6 +20,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    // Add user
+    public void addUser(User user) {
+        userRepository.save(user);
+    }
+
     // Register Method:
     public User registerUser(User newUser, BindingResult bindingResult) {
         Optional<User> potentialUser = userRepository.findByEmail(newUser.getEmail());
