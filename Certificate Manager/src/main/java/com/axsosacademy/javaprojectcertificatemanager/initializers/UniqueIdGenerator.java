@@ -1,4 +1,4 @@
-package com.axsosacademy.javaprojectcertificatemanager.services;
+package com.axsosacademy.javaprojectcertificatemanager.initializers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
