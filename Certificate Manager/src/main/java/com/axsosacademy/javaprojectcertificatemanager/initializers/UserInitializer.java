@@ -1,6 +1,8 @@
 package com.axsosacademy.javaprojectcertificatemanager.initializers;
 
+import com.axsosacademy.javaprojectcertificatemanager.models.Department;
 import com.axsosacademy.javaprojectcertificatemanager.models.User;
+import com.axsosacademy.javaprojectcertificatemanager.repositories.DepartmentRepository;
 import com.axsosacademy.javaprojectcertificatemanager.repositories.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.boot.CommandLineRunner;
@@ -11,10 +13,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserInitializer implements CommandLineRunner {
 
-    private final UserRepository userRepository; // Replace with your User Repository
+    private final UserRepository userRepository;
+    private final DepartmentRepository departmentRepository;
 
-    public UserInitializer(UserRepository userRepository) {
+    public UserInitializer(UserRepository userRepository, DepartmentRepository departmentRepository) {
         this.userRepository = userRepository;
+        this.departmentRepository = departmentRepository;
     }
 
     @Override
@@ -35,7 +39,8 @@ public class UserInitializer implements CommandLineRunner {
             admin.setLastName("User");
             admin.setConfirmPassword("qwer1234");
             admin.setPhoneNumber("1234567890");
-
+            Department adminDepartment = departmentRepository.findById(1L).orElse(null);
+            admin.setDepartment(adminDepartment);
             userRepository.save(admin);
             System.out.println("Admin user created: " + email);
         } else {
