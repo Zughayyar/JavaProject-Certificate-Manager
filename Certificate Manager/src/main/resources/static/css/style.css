@@ -279,3 +279,49 @@ tr:nth-child(even) {
     .dropdown img {
     cursor: pointer;
 }
+
+/* General styles for form elements */
+.select_element {
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #292727;
+    margin-bottom: 5px;
+    display: block;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #691489;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #292727;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+select:focus {
+    border-color: #691489;
+    background-color: #ffffff;
+}
+
+/* Optional: Styling the disabled and selected options */
+select option[disabled] {
+    color: #999;
+}
+
+select option {
+    color: #292727;
+}
+
+/* Optional: Add hover effect for the dropdown */
+select:hover {
+    border-color: #691489;
+    background-color: #f2f2f2;
+}
+
