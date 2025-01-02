@@ -1,7 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
-    overflow: hidden;
 }
 h1 {
     font-size: 24px;
@@ -39,7 +38,7 @@ label {
     display: block;
     margin-top: 10px;
 }
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type="email"] {
     width: calc(100% - 20px);
     padding: 10px;
     margin-top: 5px;
@@ -49,7 +48,7 @@ input[type="text"], input[type="password"] {
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-input[type="text"]:focus, input[type="password"]:focus {
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
     border-color: #691489;
     box-shadow: 0 0 5px rgba(105, 20, 137, 0.5);
     outline: none;
@@ -329,3 +328,6 @@ select:hover {
     background-color: #f2f2f2;
 }
 
+.text-danger{
+    color: red;
+}
