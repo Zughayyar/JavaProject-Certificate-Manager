@@ -1,8 +1,10 @@
 package com.axsosacademy.javaprojectcertificatemanager.controllers;
 
+import com.axsosacademy.javaprojectcertificatemanager.models.Bootcamp;
 import com.axsosacademy.javaprojectcertificatemanager.models.Department;
 import com.axsosacademy.javaprojectcertificatemanager.models.Student;
 import com.axsosacademy.javaprojectcertificatemanager.models.User;
+import com.axsosacademy.javaprojectcertificatemanager.services.BootcampService;
 import com.axsosacademy.javaprojectcertificatemanager.services.DepartmentService;
 import com.axsosacademy.javaprojectcertificatemanager.services.StudentService;
 import com.axsosacademy.javaprojectcertificatemanager.services.UserService;
@@ -24,14 +26,17 @@ public class AdminController {
     private final UserService userService;
     private final DepartmentService departmentService;
     private final StudentService studentService;
+    private final BootcampService bootcampService;
     public AdminController(
             UserService userService,
             DepartmentService departmentService,
-            StudentService studentService
+            StudentService studentService,
+            BootcampService bootcampService
     ) {
         this.userService = userService;
         this.departmentService = departmentService;
         this.studentService = studentService;
+        this.bootcampService = bootcampService;
     }
 
     // Admin Dashboard
@@ -153,8 +158,31 @@ public class AdminController {
 
     // Bootcamp Add page
     @GetMapping("/bootcamps")
-    public String bootcamps(Model model) {
+    public String bootcamps(Model model, HttpSession session) {
+        if (session.getAttribute("loggedUser") == null) {
+            return "redirect:/";
+        }
+        List<Bootcamp> bootcamps = bootcampService.getAllBootcamps();
+        model.addAttribute("bootcamps", bootcamps);
+        model.addAttribute("newBootcamp", new Bootcamp());
         return "bootcamp_add_table";
+    }
+
+    @PostMapping("bootcamps/addBootcamp")
+    public String addBootcamp(
+            @Valid @ModelAttribute("newBootcamp") Bootcamp newBootcamp,
+            BindingResult bindingResult,
+            Model model
+    ) {
+        if (bindingResult.hasErrors()) {
+            List<Bootcamp> bootcamps = bootcampService.getAllBootcamps();
+            model.addAttribute("bootcamps", bootcamps);
+            return "bootcamp_add_table";
+        }
+        else {
+            bootcampService.addBootcamp(newBootcamp);
+            return "redirect:/bootcamps";
+        }
     }
 
     // Certificates Page
