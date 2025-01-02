@@ -27,7 +27,7 @@ public class DataSeeder {
     CommandLineRunner initUsers() {
         return args -> {
             // Check if the first user already exists
-            if (userRepository.findByEmail("admin@example.com").isEmpty()) {
+            if (userRepository.findByEmail("admin@certmanager.com").isEmpty()) {
                 User admin = new User();
                 admin.setEmail("admin@certmanager.com");
                 admin.setPassword(passwordEncoder.encode("qwer1234"));// Use BCrypt
