@@ -64,21 +64,21 @@
     <div class="container">
         <div class="form-container">
             <h1>Add financial</h1>
-            <form>
-                <label for="first-name">First name</label>
-                <input type="text" id="first-name" name="first-name" placeholder="first name">
+            <form action="#" th:action="@{/accountants/addAccountant}" th:object="${accountants}" method="post">
+                <label for="firstName">First name</label>
+                <input type="text" id="first-name" th:field=*"{firstName}" placeholder="first name">
                 
-                <label for="last-name">Last Name</label>
-                <input type="text" id="last-name" name="last-name" placeholder="last name">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" th:field=*"{lastName}" placeholder="last name">
                 
                 <label for="email">Email</label>
-                <input type="text" id="email" name="email" placeholder="Email">
+                <input type="text" id="email" th:field=*"{email}" placeholder="Email">
 
                 <label for="phoneNumber">Phone number</label>
-                <input type="text" id="email" name="email" placeholder="Phone number">
+                <input type="text" id="email" th:field=*"{phoneNumber}" placeholder="Phone number">
                 
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password">
+                <input type="password" id="password" th:field=*"{password}" placeholder="Password">
                 
                 <input id="submit" type="submit" value="Submit">
             </form>
@@ -96,11 +96,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>anas</td>
-                        <td>zughayyar</td>
-                        <td>anas@axsos.com</td>
-                        <td>0596005000</td>
+                    <tr th:each="account: ${accountants}">
+							<td th:text="${account.firstName}" />
+							<td th:text="${account.lastName}" />
+							<td th:text="${account.email}" />
+							<td th:text="${account.phoneNumber}" />
                         <td><a href="/accountants/edit">Edit</a> || <a href="">Delete</a></td>
                     </tr>
                 </tbody>
