@@ -1,17 +1,16 @@
 package com.axsosacademy.javaprojectcertificatemanager.controllers;
 
-
+import com.axsosacademy.javaprojectcertificatemanager.services.UserService;
 import com.axsosacademy.javaprojectcertificatemanager.models.LoginUser;
 import com.axsosacademy.javaprojectcertificatemanager.models.User;
-import com.axsosacademy.javaprojectcertificatemanager.services.UserService;
-import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.stereotype.Controller;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.ui.Model;
+import jakarta.validation.Valid;
 
 @Controller
 public class LoginController {
@@ -24,9 +23,27 @@ public class LoginController {
 
     // Login Page
     @GetMapping("/")
-    public String login(Model model) {
-        model.addAttribute("newLogin", new LoginUser());
-        return "login";
+    public String login(Model model, HttpSession session) {
+        if (session.getAttribute("loggedUser") == null) {
+            model.addAttribute("newLogin", new LoginUser());
+            return "login";
+        }
+        else {
+            User loggedUser = (User) session.getAttribute("loggedUser");
+            return checkLoginUser(loggedUser);
+        }
+    }
+
+    private String checkLoginUser(User loggedUser) {
+        Long departmentId = loggedUser.getDepartment().getId();
+        if (departmentId == 1) {
+            return "redirect:/adminDashboard";
+        } else if (departmentId == 2) {
+            return "redirect:/teacherDashboard";
+        } else if (departmentId == 3) {
+            return "redirect:/accountantDashboard";
+        }
+        return "redirect:/";
     }
 
     // Login Method
@@ -42,15 +59,7 @@ public class LoginController {
         }
         else {
             session.setAttribute("loggedUser", loggedUser);
-            Long departmentId = loggedUser.getDepartment().getId();
-            if (departmentId == 1) {
-                return "redirect:/adminDashboard";
-            } else if (departmentId == 2) {
-                return "redirect:/teacherDashboard";
-            } else if (departmentId == 3) {
-                return "redirect:/accountantDashboard";
-            }
-            return "redirect:/";
+            return checkLoginUser(loggedUser);
         }
     }
 

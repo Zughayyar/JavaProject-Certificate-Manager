@@ -1,13 +1,7 @@
 package com.axsosacademy.javaprojectcertificatemanager.controllers;
 
-import com.axsosacademy.javaprojectcertificatemanager.models.Bootcamp;
-import com.axsosacademy.javaprojectcertificatemanager.models.Department;
-import com.axsosacademy.javaprojectcertificatemanager.models.Student;
-import com.axsosacademy.javaprojectcertificatemanager.models.User;
-import com.axsosacademy.javaprojectcertificatemanager.services.BootcampService;
-import com.axsosacademy.javaprojectcertificatemanager.services.DepartmentService;
-import com.axsosacademy.javaprojectcertificatemanager.services.StudentService;
-import com.axsosacademy.javaprojectcertificatemanager.services.UserService;
+import com.axsosacademy.javaprojectcertificatemanager.models.*;
+import com.axsosacademy.javaprojectcertificatemanager.services.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -28,16 +22,19 @@ public class AdminController {
     private final DepartmentService departmentService;
     private final StudentService studentService;
     private final BootcampService bootcampService;
+    private final CertificateService certificateService;
     public AdminController(
             UserService userService,
             DepartmentService departmentService,
             StudentService studentService,
-            BootcampService bootcampService
+            BootcampService bootcampService,
+            CertificateService certificateService
     ) {
         this.userService = userService;
         this.departmentService = departmentService;
         this.studentService = studentService;
         this.bootcampService = bootcampService;
+        this.certificateService = certificateService;
     }
 
     // Admin Dashboard
@@ -190,7 +187,30 @@ public class AdminController {
 
     // Certificates Page
     @GetMapping("/certificates")
-    public String certificates(Model model) {
+    public String certificates(Model model, HttpSession session) {
+        if (session.getAttribute("loggedUser") == null) {
+            return "redirect:/";
+        }
+        List<Certificate> certificates = certificateService.getAllCertificates();
+        model.addAttribute("certificates", certificates);
+        model.addAttribute("newCertificate", new Certificate());
         return "certificate_add_table";
+    }
+
+    @PostMapping("/certificates/addCertificate")
+    public String addCertificate(
+            @Valid @ModelAttribute("newCertificate") Certificate newCertificate,
+            BindingResult bindingResult,
+            Model model
+    ) {
+        if (bindingResult.hasErrors()) {
+            List<Certificate> certificates = certificateService.getAllCertificates();
+            model.addAttribute("certificates", certificates);
+            return "certificate_add_table";
+        }
+        else {
+            certificateService.addCertificate(newCertificate);
+            return "redirect:/certificates";
+        }
     }
 }
