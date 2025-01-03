@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -86,6 +87,27 @@ public class AdminController {
         model.addAttribute("teacher", user);  // Add teacher to the model for the form
         return "teacher_edit";  // Return the view for editing
     }    
+
+
+
+    @GetMapping("/teachers/delete/{id}")
+    public String deleteteacher(@PathVariable Long id) {
+        userService.deleteUserById(id); 
+        return "redirect:/teachers"; 
+    }
+    
+    @GetMapping("/accountants/delete/{id}")
+    public String deleteaccountant(@PathVariable Long id) {
+        userService.deleteUserById(id); 
+        return "redirect:/accountants"; 
+    }
+
+    @GetMapping("/students/delete/{id}")
+    public String deletestudent(@PathVariable Long id) {
+        studentService.deleteUserById(id); 
+        return "redirect:/students"; 
+    }
+
     
     // Accountant Page and Add
     @GetMapping("/accountants")

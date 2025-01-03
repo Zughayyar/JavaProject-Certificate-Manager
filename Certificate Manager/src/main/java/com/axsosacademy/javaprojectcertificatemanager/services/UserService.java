@@ -79,6 +79,8 @@ public class UserService {
         userRepository.save(user);  // Make sure this is saving the updated user in the database
     }
     
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
 
-
+}
 }
