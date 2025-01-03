@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -81,12 +82,14 @@ public class AdminController {
         }
     }
 
-    // Teachers Edit page
-    @GetMapping("/teachers/edit/")
-    public String editTeachers(Model model) {
-        return "teacher_edit";
-    }
-
+    @GetMapping("/teachers/edit/{id}")
+    public String editTeacher(@PathVariable Long id, Model model) {
+        // Find the teacher by id
+        User user = userService.findById(id);
+        model.addAttribute("teacher", user);  // Add teacher to the model for the form
+        return "teacher_edit";  // Return the view for editing
+    }    
+    
     // Accountant Page and Add
     @GetMapping("/accountants")
     public String accountants(Model model, HttpSession session) {
