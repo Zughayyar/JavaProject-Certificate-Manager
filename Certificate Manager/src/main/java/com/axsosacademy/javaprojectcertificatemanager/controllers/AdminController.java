@@ -92,14 +92,20 @@ public class AdminController {
 
     @GetMapping("/teachers/delete/{id}")
     public String deleteteacher(@PathVariable Long id) {
-        userService.deleteUserById(id); // Correct service call
-        return "redirect:/teachers"; // Redirect to the list of teachers after deletion
+        userService.deleteUserById(id); 
+        return "redirect:/teachers"; 
     }
     
     @GetMapping("/accountants/delete/{id}")
     public String deleteaccountant(@PathVariable Long id) {
-        userService.deleteUserById(id); // Correct service call
-        return "redirect:/accountants"; // Redirect to the list of teachers after deletion
+        userService.deleteUserById(id); 
+        return "redirect:/accountants"; 
+    }
+
+    @GetMapping("/students/delete/{id}")
+    public String deletestudent(@PathVariable Long id) {
+        studentService.deleteUserById(id); 
+        return "redirect:/students"; 
     }
 
     
