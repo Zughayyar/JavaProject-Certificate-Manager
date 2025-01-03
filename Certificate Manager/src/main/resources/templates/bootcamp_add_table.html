@@ -1,109 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add financial</title>
-    <link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add financial</title>
+<link rel="icon"
+	href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png"
+	type="image/icon type">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
 <body>
-        <!-- Header Section -->
-        <header class="header">
-            <div class="left">
-                <img
-                    src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png"
-                    alt="Site logo">
-            </div>
-            <div class="right">
-                <span th:text="${session.loggedUser.getFirstName()}"></span>
-            <span th:text="${session.loggedUser.getLastName()}"></span>                
-            <div class="dropdown">
-                    <img 
-                        src="https://cdn-icons-png.freepik.com/512/10813/10813375.png" 
-                        alt="User icon">
-                    <div class="dropdown-content">
-                        
-                        <a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
-                    </div>
-                </div>
-            </div>
-        </header>
-     
-        <!-- Sidebar Section -->
-        <aside class="sidebar">
-            <a href="/adminDashboard" >
-                <i class="fas fa-tachometer-alt"></i>
-                Dashboard
-            </a>
-            <a href="/teachers" >
-                <i class="fas fa-chalkboard-teacher"></i>
-                Teachers
-            </a>
-            <a href="/students">
-                <i class="fas fa-user-graduate"></i>
-                Students
-            </a>
-            <a href="/accountants">
-                <i class="fas fa-file-invoice-dollar"></i>
-                financials
-            </a>
-            <a href="/bootcamps" class="active">
-                <i class="fas fa-laptop-code"></i>
-                Bootcamp
-            </a>
-            <a href="/certificates">
-                <i class="fas fa-check-square"></i>
-                Certificate
-            </a>
-       
-        </aside>
-     
-        <main class="content">
-     
-    <div class="container">
-        <div class="form-container">
-            <h1>Add Bootcamp</h1>
-            <form>
-                <label for="bootcamp-name">Bootcamp Name</label>
-                <input type="text" id="bootcamp-name" name="bootcamp-name" placeholder="bootcamp name">
+	<!-- Header Section -->
+	<header class="header">
+		<div class="left">
+			<img src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png"
+				alt="Site logo">
+		</div>
+		<div class="right">
+			<span th:text="${session.loggedUser.getFirstName()}"></span> <span
+				th:text="${session.loggedUser.getLastName()}"></span>
+			<div class="dropdown">
+				<img src="https://cdn-icons-png.freepik.com/512/10813/10813375.png"
+					alt="User icon">
+				<div class="dropdown-content">
 
-                <label for="Start">Start</label>
-                <input type="date" id="Start" name="Start" placeholder="Start">
-                
-                <label for="end">End</label>
-                <input type="date" id="end" name="end">
-               
-                <label for="descreiption">Descreiption</label>
-                <textarea name="descreiption" id="descreiption"></textarea>
-                <br>
-                <input id="submit" type="submit" value="Submit">
-            </form>
-        </div>
-        <div class="table-container">
-            <label>All financials</label>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Bootcamp</th>
-                        <th>Descreiption</th>
-                        <th>Start</th>
-                        <th>End</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>on-site</td>
-                        <td>Web-Fundemuntels,Python,Java,Mern</td>
-                        <td>9/23/2024</td>
-                        <td>2/23/2025</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    </main>
+					<a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Sidebar Section -->
+	<aside class="sidebar">
+		<a href="/adminDashboard"> <i class="fas fa-tachometer-alt"></i>
+			Dashboard
+		</a> <a href="/teachers"> <i class="fas fa-chalkboard-teacher"></i>
+			Teachers
+		</a> <a href="/students"> <i class="fas fa-user-graduate"></i>
+			Students
+		</a> <a href="/accountants"> <i class="fas fa-file-invoice-dollar"></i>
+			financials
+		</a> <a href="/bootcamps" class="active"> <i
+			class="fas fa-laptop-code"></i> Bootcamp
+		</a> <a href="/certificates"> <i class="fas fa-check-square"></i>
+			Certificate
+		</a>
+
+	</aside>
+
+	<main class="content">
+
+		<div class="container">
+			<div class="form-container">
+				<h1>Add Bootcamp</h1>
+				<form th:action="@{/}" method="post">
+					<label for="bootcamp-name">Bootcamp Name</label> 
+					<input type="text" id="bootcamp-name" th:field="*{bootcampName}"placeholder="Bootcamp name"> 
+					
+					<label for="Start">Start Date</label>
+					<input type="date" id="Start" th:field="*{startDate}"placeholder="Start Date">
+					 
+					<label for="end">End Date</label> 
+					<input type="date" id="end" th:field="*{endDate} placeholder="End Date"> 
+					
+					<label for="descreiption">Description</label>
+					<textarea id="descreiption" th:field="*{description}"></textarea>
+					
+					<br> <input id="submit" type="submit" value="Submit">
+				</form>
+			</div>
+			<div class="table-container">
+				<label>All financials</label>
+				<table>
+					<thead>
+						<tr>
+							<th>Bootcamp</th>
+							<th>Descreiption</th>
+							<th>Start</th>
+							<th>End</th>
+						</tr>
+					</thead>
+					<tbody>
+						  <tr th:each="bootcamp : ${bootcamps}">
+                   				 <td th:text="${bootcamp.bootcampName}"></td>
+                   				 <td th:text="${bootcamp.description}"></td>
+                    		 	 <td th:text="${bootcamp.startDate}"></td>
+                    			 <td th:text="${bootcamp.endDate}"></td>
+               			 </tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</main>
 </body>
 </html>

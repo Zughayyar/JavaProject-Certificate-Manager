@@ -68,19 +68,7 @@
 				<ul>
 					<li th:each="err : ${#fields.errors('phoneNumber')}" th:text="${err}" class="text-danger"></li>
 				</ul>
-			
-				<label for="password">Password</label>
-				<input type="password" id="password" th:field="*{password}" placeholder="Enter Password">
-				<ul>
-					<li th:each="err : ${#fields.errors('password')}" th:text="${err}" class="text-danger"></li>
-				</ul>
-			
-				<label for="confirmPassword">Confirm Password</label>
-				<input type="password" id="confirmPassword" th:field="*{confirmPassword}" placeholder="Confirm Password">
-				<ul>
-					<li th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}" class="text-danger"></li>
-				</ul>
-
+				
                 <input id="submit" type="submit" value="Save" class="btn btn-primary">
             </form>
         </div>
