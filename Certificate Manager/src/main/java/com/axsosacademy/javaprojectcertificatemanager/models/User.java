@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -60,9 +61,13 @@ public class User {
     }
 
     // Relations
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id")
-    private Department department;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "roles_users",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "approvedBy", fetch = FetchType.LAZY)
     private List<Approval> approvalList;
@@ -72,11 +77,13 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String password) {
+    public User(String firstName, String lastName, String email, String password, String confirmPassword, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.phoneNumber = phoneNumber;
     }
 
     // Getters
@@ -113,9 +120,6 @@ public class User {
         return updatedAt;
     }
 
-    public Department getDepartment() {
-        return department;
-    }
 
     public List<Approval> getApprovalList() {
         return approvalList;
@@ -123,6 +127,10 @@ public class User {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
     }
 
     // Setters
@@ -147,9 +155,6 @@ public class User {
         this.password = password;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
 
     public void setApprovalList(List<Approval> approvalList) {
         this.approvalList = approvalList;
@@ -161,5 +166,9 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }

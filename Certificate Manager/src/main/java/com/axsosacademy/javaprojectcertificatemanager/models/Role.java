@@ -5,20 +5,21 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "departments")
-public class Department {
+@Table(name = "roles")
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Department Name is Required!")
-    private String departmentName;
-    private String departmentDescription;
+    @NotEmpty(message = "Role Name is Required!")
+    private String roleName;
+    private String roleDescription;
 
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -38,17 +39,22 @@ public class Department {
     }
 
     // Relations
-    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
-    private List<User> users;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "roles_users",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> users = new ArrayList<>();
 
     // Constructors
 
-    public Department() {
+    public Role() {
     }
 
-    public Department(String departmentName, String departmentDescription) {
-        this.departmentName = departmentName;
-        this.departmentDescription = departmentDescription;
+    public Role(String roleName, String roleDescription) {
+        this.roleName = roleName;
+        this.roleDescription = roleDescription;
     }
 
     // Getters
@@ -57,12 +63,12 @@ public class Department {
         return id;
     }
 
-    public String getDepartmentName() {
-        return departmentName;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public String getDepartmentDescription() {
-        return departmentDescription;
+    public String getRoleDescription() {
+        return roleDescription;
     }
 
     public Date getCreatedAt() {
@@ -79,12 +85,13 @@ public class Department {
 
     // Setters
 
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
-    public void setDepartmentDescription(String departmentDescription) {
-        this.departmentDescription = departmentDescription;
+    public void setRoleDescription(String roleDescription) {
+        this.roleDescription = roleDescription;
     }
 
     public void setUsers(List<User> users) {

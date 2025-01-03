@@ -35,12 +35,12 @@ public class LoginController {
     }
 
     private String checkLoginUser(User loggedUser) {
-        Long departmentId = loggedUser.getDepartment().getId();
-        if (departmentId == 1) {
+        Long roleId = loggedUser.getRoles().get(0).getId();
+        if (roleId == 1) {
             return "redirect:/adminDashboard";
-        } else if (departmentId == 2) {
+        } else if (roleId == 2) {
             return "redirect:/teacherDashboard";
-        } else if (departmentId == 3) {
+        } else if (roleId == 3) {
             return "redirect:/accountantDashboard";
         }
         return "redirect:/";

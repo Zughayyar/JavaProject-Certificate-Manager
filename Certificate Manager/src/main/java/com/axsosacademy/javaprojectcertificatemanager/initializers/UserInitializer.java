@@ -1,28 +1,41 @@
 package com.axsosacademy.javaprojectcertificatemanager.initializers;
 
-import com.axsosacademy.javaprojectcertificatemanager.models.Department;
+import com.axsosacademy.javaprojectcertificatemanager.models.Role;
 import com.axsosacademy.javaprojectcertificatemanager.models.User;
-import com.axsosacademy.javaprojectcertificatemanager.repositories.DepartmentRepository;
+import com.axsosacademy.javaprojectcertificatemanager.repositories.RoleRepository;
 import com.axsosacademy.javaprojectcertificatemanager.repositories.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 
 
 @Component
 public class UserInitializer implements CommandLineRunner {
 
     private final UserRepository userRepository;
-    private final DepartmentRepository departmentRepository;
+    private final RoleRepository roleRepository;
 
-    public UserInitializer(UserRepository userRepository, DepartmentRepository departmentRepository) {
+    public UserInitializer(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
-        this.departmentRepository = departmentRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        if (roleRepository.findAll().isEmpty()) {
+            Role adminRole = new Role("ROLE_ADMIN","Administration");
+            roleRepository.save(adminRole);
+            System.out.println("Admin role created: " + adminRole.getRoleName());
+            Role teacherRole = new Role("ROLE_TEACHER","Teaching Department");
+            roleRepository.save(teacherRole);
+            System.out.println("Teacher role created: " + teacherRole.getRoleName());
+            Role accountantRole = new Role("ROLE_ACCOUNTANT","Financial Department");
+            roleRepository.save(accountantRole);
+            System.out.println("Accountant role created: " + accountantRole.getRoleName());
+        }
+
         String email = "admin@certmanager.com";
         String plainPassword = "qwer1234";
 
@@ -32,15 +45,9 @@ public class UserInitializer implements CommandLineRunner {
             String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
 
             // Create and save the user
-            User admin = new User(); // Replace with your User model
-            admin.setEmail(email);
-            admin.setPassword(hashedPassword);
-            admin.setFirstName("Admin");
-            admin.setLastName("User");
-            admin.setConfirmPassword("qwer1234");
-            admin.setPhoneNumber("1234567890");
-            Department adminDepartment = departmentRepository.findById(1L).orElse(null);
-            admin.setDepartment(adminDepartment);
+            User admin = new User("Admin", "Admin", email, hashedPassword, plainPassword, "1234567890");
+            Role adminRole = roleRepository.findAll().get(0);
+            admin.getRoles().add(adminRole);
             userRepository.save(admin);
             System.out.println("Admin user created: " + email);
         } else {
