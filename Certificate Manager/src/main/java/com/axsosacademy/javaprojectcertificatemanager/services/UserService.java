@@ -70,7 +70,15 @@ public class UserService {
             return user;
         }
     }
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
 
+    // Save or update a teacher
+    public void save(User user) {
+        userRepository.save(user);  // Make sure this is saving the updated user in the database
+    }
+    
 
 
 }
