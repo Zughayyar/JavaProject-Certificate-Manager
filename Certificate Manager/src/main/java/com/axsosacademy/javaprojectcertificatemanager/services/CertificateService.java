@@ -18,6 +18,9 @@ public class CertificateService {
         return certificateRepository.findAll();
     }
 
-
+    // Add new Certificate
+    public void addCertificate(Certificate certificate) {
+        certificateRepository.save(certificate);
+    }
 
 }
