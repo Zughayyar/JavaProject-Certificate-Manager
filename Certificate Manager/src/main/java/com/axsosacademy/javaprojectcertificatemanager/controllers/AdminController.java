@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -20,19 +19,19 @@ import java.util.List;
 public class AdminController {
 
     private final UserService userService;
-    private final DepartmentService departmentService;
+    private final RoleService roleService;
     private final StudentService studentService;
     private final BootcampService bootcampService;
     private final CertificateService certificateService;
     public AdminController(
             UserService userService,
-            DepartmentService departmentService,
+            RoleService roleService,
             StudentService studentService,
             BootcampService bootcampService,
             CertificateService certificateService
     ) {
         this.userService = userService;
-        this.departmentService = departmentService;
+        this.roleService = roleService;
         this.studentService = studentService;
         this.bootcampService = bootcampService;
         this.certificateService = certificateService;
@@ -53,7 +52,7 @@ public class AdminController {
         if (session.getAttribute("loggedUser") == null) {
             return "redirect:/";
         }
-        List<User> teachers = departmentService.getAllTeachers();
+        List<User> teachers = roleService.getAllTeachers();
         model.addAttribute("teachers", teachers);
         model.addAttribute("newTeacher", new User());
         return "teacher_add_table";
@@ -68,13 +67,13 @@ public class AdminController {
     ) {
 
         if (bindingResult.hasErrors()) {
-            List<User> teachers = departmentService.getAllTeachers();
+            List<User> teachers = roleService.getAllTeachers();
             model.addAttribute("teachers", teachers);
             return "teacher_add_table";
         }
         else {
-            Department teacherDepartment = departmentService.getDepartmentById(2L);
-            newTeacher.setDepartment(teacherDepartment);
+            Role teacherRole = roleService.getDepartmentById(2L);
+            newTeacher.getRoles().add(teacherRole);
             userService.registerUser(newTeacher, bindingResult);
             return "redirect:/teachers";
         }
@@ -89,21 +88,20 @@ public class AdminController {
     }    
 
 
-
     @GetMapping("/teachers/delete/{id}")
-    public String deleteteacher(@PathVariable Long id) {
+    public String deleteTeacher(@PathVariable Long id) {
         userService.deleteUserById(id); 
         return "redirect:/teachers"; 
     }
     
     @GetMapping("/accountants/delete/{id}")
-    public String deleteaccountant(@PathVariable Long id) {
+    public String deleteAccountant(@PathVariable Long id) {
         userService.deleteUserById(id); 
         return "redirect:/accountants"; 
     }
 
     @GetMapping("/students/delete/{id}")
-    public String deletestudent(@PathVariable Long id) {
+    public String deleteStudent(@PathVariable Long id) {
         studentService.deleteUserById(id); 
         return "redirect:/students"; 
     }
@@ -115,7 +113,7 @@ public class AdminController {
         if (session.getAttribute("loggedUser") == null) {
             return "redirect:/";
         }
-        model.addAttribute("accountants", departmentService.getAllAccountants());
+        model.addAttribute("accountants", roleService.getAllAccountants());
         model.addAttribute("newAccountant", new User());
         return "financial_add_table";
     }
@@ -128,12 +126,12 @@ public class AdminController {
             Model model
     ) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("accountants", departmentService.getAllAccountants());
+            model.addAttribute("accountants", roleService.getAllAccountants());
             return "financial_add_table";
         }
         else {
-            Department accountantDepartment = departmentService.getDepartmentById(3L);
-            newAccountant.setDepartment(accountantDepartment);
+            Role accountantRole = roleService.getDepartmentById(3L);
+            newAccountant.getRoles().add(accountantRole);
             userService.registerUser(newAccountant, bindingResult);
             return "redirect:/accountants";
         }
@@ -160,9 +158,11 @@ public class AdminController {
     @PostMapping("/students/addStudent")
     public String addStudent(
             @Valid @ModelAttribute("newStudent") Student newStudent,
-            BindingResult bindingResult
+            BindingResult bindingResult, Model model
     ) {
         if (bindingResult.hasErrors()) {
+            List<Student> students = studentService.getAllStudents();
+            model.addAttribute("students", students);
             return "student_add_table";
         }
         else {
