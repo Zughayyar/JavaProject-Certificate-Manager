@@ -168,7 +168,7 @@ public class AdminController {
         return "bootcamp_add_table";
     }
 
-    @PostMapping("bootcamps/addBootcamp")
+    @PostMapping("/bootcamps/addBootcamp")
     public String addBootcamp(
             @Valid @ModelAttribute("newBootcamp") Bootcamp newBootcamp,
             BindingResult bindingResult,
