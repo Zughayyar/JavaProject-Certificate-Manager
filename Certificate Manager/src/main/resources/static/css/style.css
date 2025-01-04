@@ -331,3 +331,60 @@ select:hover {
 .text-danger{
     color: red;
 }
+
+/* 8888888888888888888888  */
+
+/* Approval list styling */
+.approval-list {
+    list-style-type: none; /* Removes default bullet points */
+    padding: 0; /* Removes padding */
+    margin: 0; /* Removes margin */
+}
+
+/* Styling for approval list items */
+.approval-item {
+    margin-bottom: 8px; /* Adds spacing between list items */
+    padding: 5px 10px; /* Adds padding inside the list item */
+    border: 1px solid #ccc; /* Adds a border for better visibility */
+    border-radius: 5px; /* Rounds the corners */
+    background-color: #f9f9f9; /* Light background for the list item */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+}
+
+/* Hover effect for approval list items */
+.approval-item:hover {
+    background-color: #f2f2f2; /* Slightly darker background on hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds shadow for depth */
+}
+
+/* Styling for the approval text inside list items */
+.approval-text {
+    font-size: 14px; /* Sets font size */
+    color: #292727; /* Default text color */
+    font-weight: bold; /* Makes text bold */
+}
+
+/* Conditional styling for certificate status spans */
+.certificate-status {
+    display: block; /* Ensures spans stack vertically */
+    margin-top: 5px; /* Adds spacing between spans */
+    font-size: 14px; /* Sets font size */
+    font-weight: bold; /* Makes text bold */
+}
+
+.certificate-status.not-ready {
+    color: red; /* Red text for "Certificate not ready" */
+}
+
+.certificate-status.ready {
+    color: #691489; /* Purple text for "Certificate ready" */
+}
+
+/* Optional: Hover effect for spans */
+.certificate-status:hover {
+    text-decoration: underline; /* Underlines text on hover */
+    cursor: pointer; /* Changes cursor to pointer */
+}
+
+
+
