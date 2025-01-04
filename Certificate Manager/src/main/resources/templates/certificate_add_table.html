@@ -68,16 +68,16 @@
                 <div class="select_element">
                     <label for="studentSelect">Add Student</label>
                     <select id="studentSelect" th:field="*{students}">
-                        <option value="" disabled selected>Select a student</option>
+                        <option value="" selected>Select a student</option>
                         <th:block th:each="student : ${students}">
                             <option th:value="${student.id}" th:text="${student.firstName + ' ' + student.lastName}"></option>
                         </th:block>
                     </select>
-                </div>
+                </div>                
                 <div class="select_element">
                     <label for="bootcampSelect">Add Bootcamp</label>
                     <select id="bootcampSelect" th:field="*{bootcamps}">
-                        <option value="" disabled selected>Select a bootcamp</option>
+                        <option value=""  selected>Select a bootcamp</option>
                         <th:block th:each="bootcamp : ${bootcamps}">
                             <option th:value="${bootcamp.id}" th:text="${bootcamp.bootcampName}"></option>
                         </th:block>
