@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -44,8 +45,9 @@ public class AdminController {
         if (session.getAttribute("loggedUser") == null) {
             return "redirect:/";
         }
-        List<Bootcamp> allBootcamps = bootcampService.getAllBootcamps();
-        model.addAttribute("bootcamps", allBootcamps);
+        List<Bootcamp> bootcamps = bootcampService.getAllBootcamps();
+        Collections.reverse(bootcamps);
+        model.addAttribute("bootcamps", bootcamps);
         return "adminDashboard";
     }
 
