@@ -29,14 +29,14 @@
 <!-- Sidebar Section -->
 <aside class="sidebar bg-dark text-white p-3">
     <nav class="nav flex-column">
-        <a href="/teachermain" class="nav-link active text-white"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="/teacherDashboard" class="nav-link active text-white"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
     </nav>
 </aside>
 
 <main class="content">
     <div class="container">
         <!-- Back Button Section -->
-        <a href="/teachermain" class="btn btn-primary mb-3"><i class="fas fa-arrow-left"></i> Back to Teacher Dashboard</a>
+        <a href="/teacherDashboard" class="btn btn-primary mb-3"><i class="fas fa-arrow-left"></i> Back to Teacher Dashboard</a>
 
 
         <!-- Bootcamp Details Section -->
@@ -56,19 +56,17 @@
                     <tr>
                         <th>Certificate Id</th>
                         <th>Student Name</th>
-                        <th>Bootcamp Name</th>
                         <th>Detailed Status</th>
                         <th>Certificate Final Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="certificate : ${certificates}" >
+                    <tr th:each="certificate : ${bootcamp.certificates}" >
                         <td th:text="${certificate.uniqueID}" ></td>
                         <td th:text="${certificate.students.get(0).firstName} + ${certificate.students.get(0).lastName} "></td>
-                        <td th:text="${certificate.bootcamps.get(0).bootcampName}"></td>
                         <td>
                             <ul>
-                                <li th:each="approval : ${approvals}"
+                                <li th:each="approval : ${certificate.approvalList}"
                                     th:if="${approval.certificate != null and approval.certificate.id == certificate.id}">
                                     <span th:text="${approval.user.roles.get(0).getRoleName() + ' (' + approval.user.firstName + ' ' + approval.user.lastName + '): ' + (approval.approvalStatus ? 'Pass' : 'Not Pass')}"></span>
                                 </li>
