@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Financial</title>
+    <link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
+    <link rel="stylesheet" href="/css/bootcampdetails.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+<!-- Header Section -->
+<header class="header d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
+    <div class="left">
+        <img src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png" alt="Site logo">
+    </div>
+    
+    	<div class="dashboard-title">
+		    <span>Accountant Dashboard</span>
+		</div>
+    
+    <div class="right d-flex align-items-center">
+        <span th:text="${session.loggedUser.getFirstName()}"></span>
+        <span th:text="${session.loggedUser.getLastName()}"></span>
+        <div class="dropdown ms-3">
+			<img src="https://cdn-icons-png.freepik.com/512/10813/10813375.png" alt="User icon">
+            <div class="dropdown-content">
+                <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Sidebar Section -->
+<aside class="sidebar bg-dark text-white p-3">
+    <nav class="nav flex-column">
+        <a href="/teacherDashboard" class="nav-link active text-white"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    </nav>
+</aside>
+
+<main class="content">
+    <div class="container">
+        <!-- Back Button Section -->
+        <a href="/accountantDashboard class="btn btn-primary mb-3"><i class="fas fa-arrow-left"></i> Back to Teacher Dashboard</a>
+
+
+        <!-- Bootcamp Details Section -->
+        <section>
+            <h2>Bootcamp Details</h2>
+            <p><strong>Bootcamp Name:</strong> <span th:text="${bootcamp.bootcampName}"></span></p>
+            <p><strong>Description:</strong> <span th:text="${bootcamp.description}"></span></p>
+            <p><strong>Start Date:</strong> <span th:text="${#dates.format(bootcamp.startDate, 'dd-MM-yyyy')}"></span></p>
+            <p><strong>End Date:</strong> <span th:text="${#dates.format(bootcamp.endDate, 'dd-MM-yyyy')}"></span></p>
+        </section>
+
+        <section>
+         <div class="table-container">
+            <h2>All Certificate</h2>
+            <table class="text-center">
+                <thead>
+                    <tr>
+                        <th>Certificate Id</th>
+                        <th>Student Name</th>
+                        <th>Detailed Status</th>
+                        <th>Certificate Final Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="certificate : ${bootcamp.certificates}" >
+                        <td th:text="${certificate.uniqueID}" ></td>
+                        <td th:text="${certificate.students.get(0).firstName} + ${certificate.students.get(0).lastName} "></td>
+                        <td>
+                            <ul>
+                                <li th:each="approval : ${certificate.approvalList}"
+                                    th:if="${approval.certificate != null and approval.certificate.id == certificate.id}">
+                                    <span th:text="${approval.user.roles.get(0).getRoleName() + ' (' + approval.user.firstName + ' ' + approval.user.lastName + '): ' + (approval.approvalStatus ? 'Pass' : 'Not Pass')}"></span>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <span th:if="${!certificate.getCertificateStatus()}">Certificate not ready</span>
+                            <span th:if="${certificate.getCertificateStatus()}">Certificate ready</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</main>
+
+<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="/js/script.js"></script>
+</body>
+</html>
