@@ -2,6 +2,7 @@ package com.axsosacademy.javaprojectcertificatemanager.services;
 
 
 import com.axsosacademy.javaprojectcertificatemanager.models.Approval;
+import com.axsosacademy.javaprojectcertificatemanager.models.User;
 import com.axsosacademy.javaprojectcertificatemanager.repositories.ApprovalRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,18 @@ public class ApprovalService {
     // Get All Approvals
     public List<Approval> getAllApprovals() {
         return approvalRepository.findAll();
+    }
+
+    // Assign Teacher Approval to a Certificate
+    public void addNewApprovalToCertificateForTeacher(Approval approval, User teacher) {
+        approval.setUser(teacher);
+        approvalRepository.save(approval);
+    }
+
+    // Assign Financial Approval to a Certificate
+    public void AddNewApprovalToCertificateForFinancial(Approval approval, User account) {
+        approval.setUser(account);
+        approvalRepository.save(approval);
     }
 
 

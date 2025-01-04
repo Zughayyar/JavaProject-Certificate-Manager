@@ -1,9 +1,11 @@
 package com.axsosacademy.javaprojectcertificatemanager.services;
 
+import com.axsosacademy.javaprojectcertificatemanager.initializers.UniqueIdGenerator;
 import com.axsosacademy.javaprojectcertificatemanager.models.Certificate;
 import com.axsosacademy.javaprojectcertificatemanager.repositories.CertificateRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,6 +23,13 @@ public class CertificateService {
     // Add new Certificate
     public void addCertificate(Certificate certificate) {
         certificateRepository.save(certificate);
+        List<Certificate> certificateList = certificateRepository.findAll();
+        Certificate lastCertificate = certificateList.get(certificateList.size() - 1);
+        Long lastCertificateId = lastCertificate.getId();
+        Date lastCertificateDate = lastCertificate.getCreatedAt();
+        String lastCertUniqueId = UniqueIdGenerator.generateUniqueId(lastCertificateId, lastCertificateDate);
+        lastCertificate.setUniqueID(lastCertUniqueId);
+        certificateRepository.save(lastCertificate);
     }
 
 }
