@@ -22,7 +22,6 @@
                     src="https://cdn-icons-png.freepik.com/512/10813/10813375.png" 
                     alt="User icon">
                 <div class="dropdown-content">
-                    
                     <a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
                 </div>
             </div>
@@ -61,38 +60,22 @@
         <div class="container">
             <div class="title">Latest Bootcamps</div>
             <div class="card-container">
-                <div class="card">
-                    <img src="https://storage.googleapis.com/a1aa/image/nutUnKUfbU2AJqZLeLc8X5J1JeLbnMsKzoluWJlssHaudxAoA.jpg" alt="Bootcamp 1" class="card-image">
-                    <div class="card-content">
-                        <div class="card-title">Card Title 1</div>
-                        <div class="card-subtitle">Card Subtitle 1</div>
-                        <div class="card-buttons">
-                            <button>Certificate Details</button>
+                <!-- Reverse the list in the backend to simplify the template logic -->
+                <th:block th:each="bootcamp, iterStat : ${bootcamps}">
+                    <th:block th:if="${iterStat.index < 3}">
+                        <div class="card">
+                            <img src="https://storage.googleapis.com/a1aa/image/nutUnKUfbU2AJqZLeLc8X5J1JeLbnMsKzoluWJlssHaudxAoA.jpg"
+                                 alt="Bootcamp" class="card-image">
+                            <div class="card-content">
+                                <div class="card-title" th:text="${bootcamp.bootcampName}"></div>
+                                <div class="card-subtitle" th:text="${bootcamp.description}"></div>
+                                <div class="card-buttons">
+                                    <button>Certificate Details</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://storage.googleapis.com/a1aa/image/nutUnKUfbU2AJqZLeLc8X5J1JeLbnMsKzoluWJlssHaudxAoA.jpg" alt="Bootcamp 2" class="card-image">
-                    <div class="card-content">
-                        <div class="card-title">Card Title 2</div>
-                        <div class="card-subtitle">Card Subtitle 2</div>
-                        <div class="card-buttons">
-                            <button>Certificate Details</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://storage.googleapis.com/a1aa/image/nutUnKUfbU2AJqZLeLc8X5J1JeLbnMsKzoluWJlssHaudxAoA.jpg" alt="Bootcamp 3" class="card-image">
-                    <div class="card-content">
-                        <div class="card-title">Card Title 3</div>
-                        <div class="card-subtitle">Card Subtitle 3</div>
-                        <div class="card-buttons">
-                            <button>Certificate Details</button>
-                        </div>
-                    </div>
-                </div>
+                    </th:block>
+                </th:block>
             </div>
         </div>
     </main>
