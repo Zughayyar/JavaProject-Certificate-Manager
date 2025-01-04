@@ -84,7 +84,7 @@
 
 		<div class="table-container">
 			<h2>All Teachers</h2>
-			<table class="table table-bordered table-hover">
+			<table class="table table-bordered table-hover" border=1>
 				<thead>
 				<tr>
 					<th>First Name</th>
@@ -101,7 +101,6 @@
 					<td th:text="${teacher.email}"></td>
 					<td th:text="${teacher.phoneNumber}"></td>
 					<td>
-						<a th:href="@{/teachers/edit/{id}(id=${teacher.id})}" class="btn btn-info btn-sm">Edit</a>
 						<a th:href="@{/teachers/delete/{id}(id=${teacher.id})}" class="btn btn-danger btn-sm">Delete</a>
 					</td>
 				</tr>

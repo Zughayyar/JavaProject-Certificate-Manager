@@ -70,10 +70,12 @@
                             <td>
                                 <form th:action="@{/accountant/bootcamp/{id}/certificate/update(id=${bootcamp.id})}" method="post" class="me-3">
                                     <input type="hidden" name="approvalId" th:value="${certificate.approvalList.get(1).getId()}">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="status" onchange="this.form.submit()" th:checked="${certificate.approvalList.get(1).approvalStatus}" >
+                                    <div class="approval-checkbox-container">
+                                        <span class="approval-status" th:text="${certificate.approvalList.get(1).approvalStatus ? 'Pass' : 'Not Pass'}"></span>
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="status" onchange="this.form.submit()" th:checked="${certificate.approvalList.get(1).approvalStatus}">
+                                    </div>
                                 </form>
-                                <span th:text="${certificate.approvalList.get(1).approvalStatus ? 'Pass' : 'Not Pass'}" ></span>
-                            </td>
+                            </td>                            
                         </tr>
                         </tbody>
                     </table>

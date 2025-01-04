@@ -127,20 +127,41 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
+    background-color: #fff; /* Consistent background color */
+    border-radius: 8px; /* Rounded corners for the table */
+    overflow: hidden; /* Ensures rounded corners are effective */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
+
 th, td {
-    border: 1px solid rgba(0, 0, 0, 0.322);
-    padding: 8px;
-    text-align: left;
-    background-color: #ffffff;
-    color: #292727;
+    padding: 12px; /* Increased padding for better spacing */
+    text-align: left; /* Align text to the left */
+    border-bottom: 1px solid #ddd; /* Light border between rows */
+    color: #292727; /* Dark text color */
 }
+
 th {
-    background-color: #f2f2f2;
+    background-color: #691489; /* Header background color */
+    color: #f2f2f2; /* Light text color for contrast */
 }
+
 tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #f9f9f9; /* Alternating row color */
 }
+
+tr:hover {
+    background-color: #f2f2f2; /* Highlight row on hover */
+    cursor: default; /* Neutral cursor for table rows */
+}
+
+td:first-child, th:first-child {
+    padding-left: 20px; /* Extra padding for the first column */
+}
+
+td:last-child, th:last-child {
+    padding-right: 20px; /* Extra padding for the last column */
+}
+
 .required {
     float: right;
 }

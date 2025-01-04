@@ -56,7 +56,7 @@
         <section>
          <div class="table-container">
             <h2>All Certificate</h2>
-            <table class="text-center">
+            <table class="text-center" border=1>
                 <thead>
                     <tr>
                         <th>Certificate Id</th>
@@ -71,10 +71,13 @@
                         <td>
                             <form th:action="@{/teacher/bootcamp/{id}/certificate/update(id=${bootcamp.id})}" method="post" class="me-3">
                                 <input type="hidden" name="approvalId" th:value="${certificate.approvalList.get(0).getId()}">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="status" onchange="this.form.submit()" th:checked="${certificate.approvalList.get(0).approvalStatus}" >
+                                <div class="approval-checkbox-container">
+                                    <span class="approval-status" th:text="${certificate.approvalList.get(0).approvalStatus ? 'Pass' : 'Not Pass'}"></span>
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="status" onchange="this.form.submit()" th:checked="${certificate.approvalList.get(0).approvalStatus}">
+                                </div>
                             </form>
-                            <span th:text="${certificate.approvalList.get(0).approvalStatus ? 'Pass' : 'Not Pass'}" ></span>
                         </td>
+                        
                     </tr>
                 </tbody>
             </table>
