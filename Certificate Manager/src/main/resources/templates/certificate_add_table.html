@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Teacher</title>
+    <title>Add Certificate</title>
     <link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
@@ -63,7 +63,7 @@
      
     <div class="container">
         <div class="form-container">
-            <h1>Add Teacher</h1>
+            <h1>Add Certificate</h1>
             <form action="#" th:action="@{/certificates/addCertificate}" th:object="${newCertificate}" method="post">
                 <div class="select_element">
                     <label for="studentSelect">Add Student</label>
@@ -122,18 +122,20 @@
                         <td th:text="${certificate.uniqueID}" ></td>
                         <td th:text="${certificate.students.get(0).firstName} + ${certificate.students.get(0).lastName} "></td>
                         <td th:text="${certificate.bootcamps.get(0).bootcampName}"></td>
-                        <td>
-                            <ul>
-                                <li th:each="approval : ${approvals}"
-                                    th:if="${approval.certificate != null and approval.certificate.id == certificate.id}">
-                                    <span th:text="${approval.user.roles.get(0).getRoleName() + ' (' + approval.user.firstName + ' ' + approval.user.lastName + '): ' + (approval.approvalStatus ? 'Pass' : 'Not Pass')}"></span>
-                                </li>
-                            </ul>
-                        </td>
-                        <td>
-                            <span th:if="${!certificate.getCertificateStatus()}">Certificate not ready</span>
-                            <span th:if="${certificate.getCertificateStatus()}">Certificate ready</span>
-                        </td>
+                       <td>
+						    <ul class="approval-list">
+						        <li th:each="approval : ${approvals}"
+						            th:if="${approval.certificate != null and approval.certificate.id == certificate.id}" 
+						            class="approval-item">
+						            <span class="approval-text" 
+						                  th:text="${approval.user.roles.get(0).getRoleName() + ' (' + approval.user.firstName + ' ' + approval.user.lastName + '): ' + (approval.approvalStatus ? 'Pass' : 'Not Pass')}"></span>
+						        </li>
+						    </ul>
+					  </td>
+					  <td>
+						    <span th:if="${!certificate.getCertificateStatus()}" class="certificate-status not-ready">Certificate not ready</span>
+						    <span th:if="${certificate.getCertificateStatus()}" class="certificate-status ready">Certificate ready</span>
+					  </td>
                     </tr>
                 </tbody>
             </table>
