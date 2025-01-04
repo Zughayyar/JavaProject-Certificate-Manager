@@ -56,17 +56,19 @@
                     <tr>
                         <th>Certificate Id</th>
                         <th>Student Name</th>
-                        <th>Certificate Status</th>
-                        <th>Action</th>
+                        <th>Approval Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="certificate : ${bootcamp.certificates}" >
                         <td th:text="${certificate.uniqueID}" ></td>
                         <td th:text="${certificate.students.get(0).firstName} + ${certificate.students.get(0).lastName} "></td>
-                        <td th:text="${certificate.approvalList.get(1).approvalStatus ? 'Pass' : 'Not Pass'}"></td>
                         <td>
-                            edit status
+                            <form th:action="@{/teacher/bootcamp/{id}/certificate/update(id=${bootcamp.id})}" method="post" class="me-3">
+                                <input type="hidden" name="approvalId" th:value="${certificate.approvalList.get(0).getId()}">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="status" onchange="this.form.submit()" th:checked="${certificate.approvalList.get(0).approvalStatus}" >
+                            </form>
+                            <span th:text="${certificate.approvalList.get(0).approvalStatus ? 'Pass' : 'Not Pass'}" ></span>
                         </td>
                     </tr>
                 </tbody>

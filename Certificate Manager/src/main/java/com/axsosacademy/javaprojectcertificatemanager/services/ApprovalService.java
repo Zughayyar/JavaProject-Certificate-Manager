@@ -39,5 +39,19 @@ public class ApprovalService {
         approvalRepository.save(approval);
     }
 
+    // Get Approval by Id
+    public Approval getApprovalById(Long id) {
+        return approvalRepository.findById(id).orElse(null);
+    }
+
+
+    public Approval findById(Long id) {
+        return approvalRepository.findById(id).orElse(null);
+    }
+
+    public void save(Approval approval) {
+        approvalRepository.save(approval);
+    }
+
 
 }
