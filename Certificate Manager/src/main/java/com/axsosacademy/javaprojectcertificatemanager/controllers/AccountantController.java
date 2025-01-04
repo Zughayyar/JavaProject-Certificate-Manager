@@ -23,7 +23,7 @@ public class AccountantController {
 
     @GetMapping("/accountantDashboard")
     public String bootcampDashboard(HttpSession session, Model model) {
-        if (session.getAttribute("user") == null) {
+        if (session.getAttribute("loggedUser") == null) {
             return "redirect:/";
         }
         List<Bootcamp> bootcamps = bootcampService.getAllBootcamps();

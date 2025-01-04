@@ -18,7 +18,7 @@
         <span th:text="${session.loggedUser.getFirstName()}"></span>
         <span th:text="${session.loggedUser.getLastName()}"></span>
         <div class="dropdown ms-3">
-			<img src="https://cdn-icons-png.freepik.com/512/10813/10813375.png" alt="User icon">
+            <img src="https://cdn-icons-png.freepik.com/512/10813/10813375.png" alt="User icon">
             <div class="dropdown-content">
                 <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
@@ -49,18 +49,18 @@
         </section>
 
         <section>
-         <div class="table-container">
-            <h2>All Certificate</h2>
-            <table class="text-center">
-                <thead>
+            <div class="table-container">
+                <h2>All Certificate</h2>
+                <table class="text-center">
+                    <thead>
                     <tr>
                         <th>Certificate Id</th>
                         <th>Student Name</th>
-                        <th>Certificate Status</th>
-                        <th>Action</th>
+                        <th>Detailed Status</th>
+                        <th>Certificate Final Status</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr th:each="certificate : ${bootcamp.certificates}" >
                         <td th:text="${certificate.uniqueID}" ></td>
                         <td th:text="${certificate.students.get(0).firstName} + ${certificate.students.get(0).lastName} "></td>
@@ -69,9 +69,9 @@
                             edit status
                         </td>
                     </tr>
-                </tbody>
-            </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>
 </main>
 
 <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
