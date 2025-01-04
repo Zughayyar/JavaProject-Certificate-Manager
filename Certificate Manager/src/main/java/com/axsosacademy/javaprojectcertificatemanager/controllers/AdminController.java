@@ -51,6 +51,17 @@ public class AdminController {
         return "adminDashboard";
     }
 
+    @GetMapping("/teachermain")
+    public String teachermain(HttpSession session, Model model) {
+        if (session.getAttribute("loggedUser") == null) {
+            return "redirect:/";
+        }
+        List<Bootcamp> bootcamps = bootcampService.getAllBootcamps();
+        Collections.reverse(bootcamps);
+        model.addAttribute("bootcamps", bootcamps);
+        return "teachermain";
+    }
+
     // Teachers Page and Add Teacher
     @GetMapping("/teachers")
     public String teachers(Model model, HttpSession session) {
@@ -283,8 +294,20 @@ public class AdminController {
 
         return "bootcampDetails";  // Thymeleaf template name
     }
+
+@GetMapping("/teacher/bootcamp/{id}")
+public String getcertDetails(@PathVariable("id") Long bootcampId, Model model) {
+    Bootcamp bootcamp = bootcampService.getBootcamp(bootcampId);
+    List<Student> students = bootcampService.getStudentsForBootcamp(bootcampId);
+
+    model.addAttribute("bootcamp", bootcamp);
+    model.addAttribute("students", students);
+    
+
+    return "certdetails";  // Thymeleaf template name
 }
 
+}
 
 //
 //    @PostMapping("/certificates/addCertificate")
