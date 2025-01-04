@@ -131,16 +131,8 @@
                             </ul>
                         </td>
                         <td>
-                            <span th:if="${#lists.isEmpty(certificate.approvalList)}">No approvals yet</span>
-                            <span th:if="${!#lists.isEmpty(certificate.approvalList)}">
-                                <span th:if="${#lists.size(certificate.approvalList) == 0}">No approvals yet</span>
-                                <span th:if="${certificate.approvalList != null}">
-                                    <span th:each="approval : ${certificate.approvalList}" th:if="${approval.approvalStatus == false}">
-                                        Certificate not ready
-                                    </span>
-                                    <span th:if="${#lists.size(certificate.approvalList) == 1}">Certificate Ready to be Issued</span>
-                                </span>
-                            </span>
+                            <span th:if="${!certificate.getCertificateStatus()}">Certificate not ready</span>
+                            <span th:if="${certificate.getCertificateStatus()}">Certificate ready</span>
                         </td>
                     </tr>
                 </tbody>

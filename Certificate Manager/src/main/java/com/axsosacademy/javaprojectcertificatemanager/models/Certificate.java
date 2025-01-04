@@ -104,4 +104,14 @@ public class Certificate {
     public void setApprovalList(List<Approval> approvalList) {
         this.approvalList = approvalList;
     }
+
+    // Get Over all Certificate Status
+    public boolean getCertificateStatus(){
+        for (Approval approval : approvalList) {
+            if (!approval.isApprovalStatus()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
