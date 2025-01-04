@@ -75,7 +75,7 @@
                     <input type="password" id="confirmPassword" th:field="*{confirmPassword}" class="form-control" placeholder="Confirm Password">
                     <div th:if="${#fields.hasErrors('confirmPassword')}" class="text-danger" th:errors="*{confirmPassword}"></div>
                 </div>
-                <input type="submit" class="btn btn-primary">
+                <input value="submit" type="submit" class="btn btn-primary">
             </form>
         </div>
 

@@ -92,12 +92,14 @@ public class AdminController {
         return "teacher_edit";  // Return the view for editing
     }
 
+    @PostMapping("/teachers/edit")
 
     @GetMapping("/teachers/delete/{id}")
     public String deleteTeacher(@PathVariable Long id) {
         userService.deleteUserById(id);
         return "redirect:/teachers";
     }
+        
 
     @GetMapping("/accountants/delete/{id}")
     public String deleteAccountant(@PathVariable Long id) {
