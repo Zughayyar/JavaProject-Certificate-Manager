@@ -7,10 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -233,21 +230,82 @@ public class AdminController {
         return "certificate_add_table";
     }
 
+
     @PostMapping("/certificates/addCertificate")
     public String addCertificate(
             @Valid @ModelAttribute("newCertificate") Certificate newCertificate,
             BindingResult bindingResult,
+            @RequestParam("teacherId") Long teacherId,
+            @RequestParam("accountantId") Long accountantId,
             Model model
     ) {
         if (bindingResult.hasErrors()) {
             List<Certificate> certificates = certificateService.getAllCertificates();
             model.addAttribute("certificates", certificates);
             return "certificate_add_table";
-        }
-        else {
+        } else {
+            // Create and assign approvals
+            Approval teacherApproval = new Approval();
+            Approval accountantApproval = new Approval();
 
+            // Find teacher and accountant
+            User teacher = userService.findById(teacherId);
+            User accountant = userService.findById(accountantId);
+
+            // Save approvals and get the saved instances
+            approvalService.addNewApprovalToCertificateForTeacher(teacherApproval, teacher);
+            // No need to fetch it again
+
+            approvalService.addNewApprovalToCertificateForFinancial(accountantApproval, accountant);
+            // No need to fetch it again
+
+            // Save certificate
             certificateService.addCertificate(newCertificate);
+
+            // Assign approvals to the saved certificate
+            approvalService.assignApprovalToCertificate(teacherApproval, newCertificate);
+            approvalService.assignApprovalToCertificate(accountantApproval, newCertificate);
+
             return "redirect:/certificates";
         }
-    }
-}
+    }}
+
+
+//
+//    @PostMapping("/certificates/addCertificate")
+//    public String addCertificate(
+//            @Valid @ModelAttribute("newCertificate") Certificate newCertificate,
+//            BindingResult bindingResult,
+//            Model model,
+//            @RequestParam("teacherId") Long teacherId,
+//            @RequestParam("accountantId") Long accountantId
+//    ) {
+//        if (bindingResult.hasErrors()) {
+//            List<Certificate> certificates = certificateService.getAllCertificates();
+//            model.addAttribute("certificates", certificates);
+//            return "certificate_add_table";
+//        }
+//        else {
+//            Approval teacherApproval = new Approval();
+//            Approval accountantApproval = new Approval();
+//            // Find users by ID
+//            User teacher = userService.findById(teacherId);
+//            User accountant = userService.findById(accountantId);
+//            List<Approval> allApprovals = approvalService.getAllApprovals();
+//
+//            approvalService.addNewApprovalToCertificateForTeacher(teacherApproval, teacher);
+//            Approval newTeacherApproval = approvalService.getAllApprovals().get(allApprovals.size() - 1);
+//
+//            approvalService.addNewApprovalToCertificateForFinancial(accountantApproval, accountant);
+//            Approval newAccountantApproval = approvalService.getAllApprovals().get(allApprovals.size() - 1);
+//            certificateService.addCertificate(newCertificate);
+//            List<Certificate> certificates = certificateService.getAllCertificates();
+//            Certificate newAddedCertificate = certificateService.getAllCertificates().get(certificates.size() - 1);
+//            approvalService.assignApprovalToCertificate(newTeacherApproval,newAddedCertificate);
+//            approvalService.assignApprovalToCertificate(newAccountantApproval, newAddedCertificate);
+//            return "redirect:/certificates";
+//        }
+//    }
+
+
+

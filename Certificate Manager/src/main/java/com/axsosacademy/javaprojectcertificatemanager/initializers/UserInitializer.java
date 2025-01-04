@@ -25,13 +25,13 @@ public class UserInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (roleRepository.findAll().isEmpty()) {
-            Role adminRole = new Role("ROLE_ADMIN","Administration");
+            Role adminRole = new Role("ADMIN","ROLE_ADMIN");
             roleRepository.save(adminRole);
             System.out.println("Admin role created: " + adminRole.getRoleName());
-            Role teacherRole = new Role("ROLE_TEACHER","Teaching Department");
+            Role teacherRole = new Role("TEACHER","ROLE_TEACHER");
             roleRepository.save(teacherRole);
             System.out.println("Teacher role created: " + teacherRole.getRoleName());
-            Role accountantRole = new Role("ROLE_ACCOUNTANT","Financial Department");
+            Role accountantRole = new Role("ACCOUNTANT","ROLE_ACCOUNTANT");
             roleRepository.save(accountantRole);
             System.out.println("Accountant role created: " + accountantRole.getRoleName());
         }

@@ -83,6 +83,24 @@
                         </th:block>
                     </select>
                 </div>
+                <div class="select_element">
+                    <label for="TeacherSelect">Assign Teacher</label>
+                    <select id="TeacherSelect" name="teacherId" required>
+                        <option value="" disabled selected>Select a Teacher</option>
+                        <th:block th:each="teacher : ${teachers}">
+                            <option th:value="${teacher.id}" th:text="${teacher.firstName + ' ' + teacher.lastName}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <div class="select_element">
+                    <label for="AccountantSelect">Assign Accountant</label>
+                    <select id="AccountantSelect" name="accountantId" required>
+                        <option value="" disabled selected>Select an Accountant</option>
+                        <th:block th:each="account : ${accountants}">
+                            <option th:value="${account.id}" th:text="${account.firstName + ' ' + account.lastName}"></option>
+                        </th:block>
+                    </select>
+                </div>
                 <input id="submit" type="submit" value="Submit">
             </form>
 
@@ -95,7 +113,8 @@
                         <th>Certificate Id</th>
                         <th>Student Name</th>
                         <th>Bootcamp Name</th>
-                        <th>Approval Status</th>
+                        <th>Detailed Status</th>
+                        <th>Certificate Final Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -106,9 +125,22 @@
                         <td>
                             <ul>
                                 <li th:each="approval : ${approvals}"
-                                    th:if="${approval.certificate.id == certificate.id}"
-                                    th:text="${approval.approvalStatus ? 'Pass' : 'Not Pass'}"></li>
+                                    th:if="${approval.certificate != null and approval.certificate.id == certificate.id}">
+                                    <span th:text="${approval.user.roles.get(0).getRoleName() + ' (' + approval.user.firstName + ' ' + approval.user.lastName + '): ' + (approval.approvalStatus ? 'Pass' : 'Not Pass')}"></span>
+                                </li>
                             </ul>
+                        </td>
+                        <td>
+                            <span th:if="${#lists.isEmpty(certificate.approvalList)}">No approvals yet</span>
+                            <span th:if="${!#lists.isEmpty(certificate.approvalList)}">
+                                <span th:if="${#lists.size(certificate.approvalList) == 0}">No approvals yet</span>
+                                <span th:if="${certificate.approvalList != null}">
+                                    <span th:each="approval : ${certificate.approvalList}" th:if="${approval.approvalStatus == false}">
+                                        Certificate not ready
+                                    </span>
+                                    <span th:if="${#lists.size(certificate.approvalList) == 1}">Certificate Ready to be Issued</span>
+                                </span>
+                            </span>
                         </td>
                     </tr>
                 </tbody>
