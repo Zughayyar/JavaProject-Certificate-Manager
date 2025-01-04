@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Financial</title>
     <link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bootcampdetails.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
@@ -43,7 +43,6 @@
         <!-- Back Button Section -->
         <a href="/adminDashboard" class="btn btn-primary mb-3"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
 
-        <div class="title">Bootcamp Details</div>
 
         <!-- Bootcamp Details Section -->
         <section>
@@ -54,10 +53,9 @@
             <p><strong>End Date:</strong> <span th:text="${#dates.format(bootcamp.endDate, 'dd-MM-yyyy')}"></span></p>
         </section>
 
-        <!-- Enrolled Students Section -->
         <section>
-            <h2>Enrolled Students</h2>
-            <table>
+            <h2>Students</h2>
+            <table border=1>
                 <thead>
                     <tr>
                         <th>First Name</th>
