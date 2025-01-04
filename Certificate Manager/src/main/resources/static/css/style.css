@@ -13,8 +13,6 @@ h1 {
 .form-container, .table-container {
     border: 1px solid #ccc;
     border-radius: 8px; 
-    padding: 20px;
-    margin: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.377); 
 }
 
@@ -231,8 +229,6 @@ tr:nth-child(even) {
  
 .content {
     margin-left: 220px;
-    padding: 30px;
-    margin-top: 70px;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     min-height: 100vh;
@@ -331,3 +327,198 @@ select:hover {
 .text-danger{
     color: red;
 }
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background-color: #f4f4f9;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #691489;
+    margin-bottom: 20px;
+}
+
+/* Bootcamp Details Section */
+section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    width: 100%;
+    max-width: 900px;
+}
+
+section h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #691489;
+    margin-bottom: 15px;
+}
+
+section p {
+    font-size: 16px;
+    color: #292727;
+    line-height: 1.5;
+}
+
+section p strong {
+    color: #691489;
+}
+
+/* Enrolled Students Section */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #292727;
+}
+
+th {
+    background-color: #691489;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f2f2f2;
+}
+
+td {
+    font-size: 14px;
+    color: #292727;
+}
+
+/* Form and Input Styling (For any future additions or modifications) */
+input[type="text"], input[type="email"], input[type="date"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="date"]:focus, textarea:focus {
+    border-color: #691489;
+    box-shadow: 0 0 5px rgba(105, 20, 137, 0.5);
+    outline: none;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+/* Button Styling (for any form submit buttons) */
+button, input[type="submit"] {
+    padding: 10px 15px;
+    background-color: #691489;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #580f74;
+}
+
+button:active, input[type="submit"]:active {
+    background-color: #450b59;
+}
+
+/* Sidebar Styling (if the page is part of a sidebar layout) */
+.sidebar {
+    width: 220px;
+    background-color: #691489;
+    color: white;
+    height: 100vh;
+    padding-top: 20px;
+    position: fixed;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+ 
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: background-color 0.3s, border-left 0.3s;
+}
+ 
+.sidebar a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 3px solid #ffffff;
+}
+ 
+.sidebar a.active {
+    background-color: #ffffff;
+    color: #691489;
+    border-left: 3px solid #ffffff;
+    font-weight: bold;
+}
+
+/* General Content Styling */
+.content {
+    padding: 30px;
+    margin-top: 70px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+    border-radius: 10px;
+}
+
+/* Header Styling */
+.header {
+    background-color: #fff;
+    color: rgb(0, 0, 0);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: solid 2px rgba(128, 128, 128, 0.096);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Title Section Styling */
+.title {
+    font-size: 28px;
+    color: #691489;
+    font-weight: bold;
+    margin-top: 80px;
+}
+

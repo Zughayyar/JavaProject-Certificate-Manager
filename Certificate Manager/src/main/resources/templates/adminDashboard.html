@@ -60,7 +60,6 @@
         <div class="container">
             <div class="title">Latest Bootcamps</div>
             <div class="card-container">
-                <!-- Reverse the list in the backend to simplify the template logic -->
                 <th:block th:each="bootcamp, iterStat : ${bootcamps}">
                     <th:block th:if="${iterStat.index < 3}">
                         <div class="card">
@@ -70,14 +69,13 @@
                                 <div class="card-title" th:text="${bootcamp.bootcampName}"></div>
                                 <div class="card-subtitle" th:text="${bootcamp.description}"></div>
                                 <div class="card-buttons">
-                                    <button>Certificate Details</button>
+                                <a th:href="@{'/bootcamp/' + ${bootcamp.id}}" class="btn-details">Bootcamp Details</a>
                                 </div>
                             </div>
                         </div>
-                    </th:block>
-                </th:block>
-            </div>
-        </div>
+                    </div>
+                </div>
     </main>
+    
 </body>
 </html>

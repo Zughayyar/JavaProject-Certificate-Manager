@@ -272,7 +272,18 @@ public class AdminController {
 
             return "redirect:/certificates";
         }
-    }}
+    }
+    @GetMapping("/bootcamp/{id}")
+    public String getBootcampDetails(@PathVariable("id") Long bootcampId, Model model) {
+        Bootcamp bootcamp = bootcampService.getBootcamp(bootcampId);
+        List<Student> students = bootcampService.getStudentsForBootcamp(bootcampId);
+
+        model.addAttribute("bootcamp", bootcamp);
+        model.addAttribute("students", students);
+
+        return "bootcampDetails";  // Thymeleaf template name
+    }
+}
 
 
 //

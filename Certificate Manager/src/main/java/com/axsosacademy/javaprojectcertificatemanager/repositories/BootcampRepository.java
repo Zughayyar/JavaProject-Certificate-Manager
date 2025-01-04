@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface BootcampRepository extends CrudRepository<Bootcamp, Long> {
     List<Bootcamp> findAll();
+    
 }
