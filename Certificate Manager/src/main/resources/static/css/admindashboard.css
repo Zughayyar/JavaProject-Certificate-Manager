@@ -316,3 +316,15 @@ button:hover {
 .btn-details:hover {
     background-color: #691489;
 }
+
+.dashboard-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #691489; /* Matches the theme color */
+    text-transform: uppercase;
+    margin: 0 auto;
+    text-align: center;
+    flex-grow: 1; /* Ensures it takes available space in the header */
+}
+
+
