@@ -26,3 +26,4 @@ replay_pid*
 .project
 Certificate Manager/bin/*
 Certificate Manager/src/main/resources/application.properties
+*.properties
