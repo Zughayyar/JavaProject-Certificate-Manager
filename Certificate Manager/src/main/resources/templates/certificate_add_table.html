@@ -64,42 +64,52 @@
     <div class="container">
         <div class="form-container">
             <h1>Add Teacher</h1>
-            <form>
+            <form action="#" th:action="@{/certificates/addCertificate}" th:object="${newCertificate}" method="post">
                 <div class="select_element">
                     <label for="studentSelect">Add Student</label>
-                    <select id="studentSelect" name="student">
-                        <option value="" disabled selected>Choose the student</option>
-                        <option value="ali">Ali</option>
+                    <select id="studentSelect" th:field="*{students}">
+                        <option value="" disabled selected>Select a student</option>
+                        <th:block th:each="student : ${students}">
+                            <option th:value="${student.id}" th:text="${student.firstName + ' ' + student.lastName}"></option>
+                        </th:block>
                     </select>
                 </div>
                 <div class="select_element">
                     <label for="bootcampSelect">Add Bootcamp</label>
-                    <select id="bootcampSelect" name="bootcamp">
-                        <option value="" disabled selected>Choose the bootcamp</option>
-                        <option value="on-site">On Site</option>
-                        <option value="online">Online</option>
+                    <select id="bootcampSelect" th:field="*{bootcamps}">
+                        <option value="" disabled selected>Select a bootcamp</option>
+                        <th:block th:each="bootcamp : ${bootcamps}">
+                            <option th:value="${bootcamp.id}" th:text="${bootcamp.bootcampName}"></option>
+                        </th:block>
                     </select>
-                </div>                
+                </div>
                 <input id="submit" type="submit" value="Submit">
             </form>
+
         </div>
         <div class="table-container">
             <label>All Certificate</label>
-            <table>
+            <table class="text-center">
                 <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Mobile Number</th>
+                        <th>Certificate Id</th>
+                        <th>Student Name</th>
+                        <th>Bootcamp Name</th>
+                        <th>Approval Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>anas</td>
-                        <td>zughayyar</td>
-                        <td>anas@axsos.com</td>
-                        <td>0596005000</td>
+                    <tr th:each="certificate : ${certificates}" >
+                        <td th:text="${certificate.uniqueID}" ></td>
+                        <td th:text="${certificate.students.get(0).firstName} + ${certificate.students.get(0).lastName} "></td>
+                        <td th:text="${certificate.bootcamps.get(0).bootcampName}"></td>
+                        <td>
+                            <ul>
+                                <li th:each="approval : ${approvals}"
+                                    th:if="${approval.certificate.id == certificate.id}"
+                                    th:text="${approval.approvalStatus ? 'Pass' : 'Not Pass'}"></li>
+                            </ul>
+                        </td>
                     </tr>
                 </tbody>
             </table>

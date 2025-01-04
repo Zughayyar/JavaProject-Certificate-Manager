@@ -44,7 +44,7 @@
         <div class="container">
 			<div class="form-container">
 				<h1>Add Bootcamp</h1>
-				<form th:action="@{/bootcamps/add}" th:object="${bootcamp}" method="post">
+				<form th:action="@{/bootcamps/addBootcamp}" th:object="${newBootcamp}" method="post">
 			
 					<label for="bootcampName">Bootcamp Name</label>
 					<input type="text" id="bootcampName" th:field="*{bootcampName}" placeholder="Enter Bootcamp Name">
@@ -89,8 +89,8 @@
 						<tr th:each="bootcamp : ${bootcamps}">
 							<td th:text="${bootcamp.bootcampName}"></td>
 							<td th:text="${bootcamp.description}"></td>
-							<td th:text="${bootcamp.startDate}"></td>
-							<td th:text="${bootcamp.endDate}"></td>
+                            <td th:text="${#dates.format(bootcamp.startDate,'dd-MM-yyyy')}" ></td>
+                            <td th:text="${#dates.format(bootcamp.endDate,'dd-MM-yyyy')}" ></td>
 						</tr>
 					</tbody>
 					

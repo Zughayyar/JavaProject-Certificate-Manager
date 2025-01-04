@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,18 +24,21 @@ public class AdminController {
     private final StudentService studentService;
     private final BootcampService bootcampService;
     private final CertificateService certificateService;
+    private final ApprovalService approvalService;
     public AdminController(
             UserService userService,
             RoleService roleService,
             StudentService studentService,
             BootcampService bootcampService,
-            CertificateService certificateService
+            CertificateService certificateService,
+            ApprovalService approvalService
     ) {
         this.userService = userService;
         this.roleService = roleService;
         this.studentService = studentService;
         this.bootcampService = bootcampService;
         this.certificateService = certificateService;
+        this.approvalService = approvalService;
     }
 
     // Admin Dashboard
@@ -214,7 +218,17 @@ public class AdminController {
             return "redirect:/";
         }
         List<Certificate> certificates = certificateService.getAllCertificates();
+        List<Student> students = studentService.getAllStudents();
+        List<Bootcamp> bootcamps = bootcampService.getAllBootcamps();
+        List<Approval> approvals = approvalService.getAllApprovals();
+        List<User> teachers = roleService.getAllTeachers();
+        List<User> accountants = roleService.getAllAccountants();
         model.addAttribute("certificates", certificates);
+        model.addAttribute("students", students);
+        model.addAttribute("bootcamps", bootcamps);
+        model.addAttribute("approvals", approvals);
+        model.addAttribute("teachers", teachers);
+        model.addAttribute("accountants", accountants);
         model.addAttribute("newCertificate", new Certificate());
         return "certificate_add_table";
     }
@@ -231,6 +245,7 @@ public class AdminController {
             return "certificate_add_table";
         }
         else {
+
             certificateService.addCertificate(newCertificate);
             return "redirect:/certificates";
         }
