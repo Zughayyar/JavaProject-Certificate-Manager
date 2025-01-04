@@ -39,7 +39,7 @@ public class LoginController {
         if (roleId == 1) {
             return "redirect:/adminDashboard";
         } else if (roleId == 2) {
-            return "redirect:/teachermain";
+            return "redirect:/teacherDashboard";
         } else if (roleId == 3) {
             return "redirect:/accountantDashboard";
         }

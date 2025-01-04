@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Dashboard</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/teacherdashboard.css">
-    <style>
-
-    </style>
+    <title>Admin Dashboard</title>
+    <link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="/css/admindashboard.css">
 </head>
 <body>
     <!-- Header Section -->
@@ -18,13 +16,12 @@
         </div>
         <div class="right">
             <span th:text="${session.loggedUser.getFirstName()}"></span>
-            <span th:text="${session.loggedUser.getLastName()}"></span>            
-            <div class="dropdownn">
+            <span th:text="${session.loggedUser.getLastName()}"></span>
+            <div class="dropdown">
                 <img 
                     src="https://cdn-icons-png.freepik.com/512/10813/10813375.png" 
                     alt="User icon">
-                <div class="dropdownn-content">
-                    
+                <div class="dropdown-content">
                     <a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
                 </div>
             </div>
@@ -33,74 +30,39 @@
 
     <!-- Sidebar Section -->
     <aside class="sidebar">
-        <a href="#" class="active">
-            <i class="fas fa-tachometer-alt"></i> Dashboard
+        <a href="/teacherDashboard" class="active">
+            <i class="fas fa-tachometer-alt"></i>
+            Dashboard
         </a>
-        <div class="dropdown">
-            <button class="dropbtn">
-                <i class="fas fa-chevron-down"></i> Bootcamps
-            </button>
-            <div class="dropdown-content">
-                <a href="#">Full-Stack Onsite</a>
-                <a href="#">Full-Stack Part-time</a>
-                <a href="#">QA Part-time</a>
-            </div>
-        </div>
     </aside>
 
-    <!-- Main Content Section -->
-    <div class="content">
-        <h1>
-            Bootcamp <span class="highlight">Details</span>
-        </h1>
-        <h2>All Students</h2>
-        <div class="table-container">
-            <table>
+    <main class="content">
+        <div class="container">
+            <div class="title">All Bootcamps</div>
+            <table class="bootcamp-table" border=1>
                 <thead>
                     <tr>
-                        <th>Students</th>
-                        <th>Stack1</th>
-                        <th>Stack2</th>
-                        <th>Stack3</th>
-                        <th>Stack4</th>
-                        <th>Oral Exam</th>
-                        <th>Overall Status</th>
+                        <th>Bootcamp Name</th>
+                        <th>Description</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Anas</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="overall-status">not pass</td>
-                    </tr>
-                    <tr>
-                        <td>Ali</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="overall-status">not pass</td>
-                    </tr>
-                    <tr>
-                        <td>Sami</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="chek"><input type="checkbox" class="status-checkbox">not pass</td>
-                        <td class="overall-status">not pass</td>
+                    <tr th:each="bootcamp : ${bootcamps}">
+                        <td>
+                            <a th:href="@{'/teacher/bootcamp/' + ${bootcamp.id}}" class="bootcamp-link" th:text="${bootcamp.bootcampName}"></a>
+                        </td>
+                        <td th:text="${bootcamp.description}"></td>
+                        <td th:text="${#dates.format(bootcamp.startDate,'dd-MM-yyyy')}"></td>
+                        <td th:text="${#dates.format(bootcamp.endDate,'dd-MM-yyyy')}"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <button id="Confirm" disabled class="Confirm">Apply Changes</button>
-    </div>
-    <script src="js/teacherdashboard.js"></script>
-
+    </main>
+    
+    
+    
 </body>
 </html>

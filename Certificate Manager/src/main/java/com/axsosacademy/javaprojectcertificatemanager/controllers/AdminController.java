@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,6 +22,7 @@ public class AdminController {
     private final BootcampService bootcampService;
     private final CertificateService certificateService;
     private final ApprovalService approvalService;
+
     public AdminController(
             UserService userService,
             RoleService roleService,
@@ -51,16 +51,6 @@ public class AdminController {
         return "adminDashboard";
     }
 
-    @GetMapping("/teachermain")
-    public String teachermain(HttpSession session, Model model) {
-        if (session.getAttribute("loggedUser") == null) {
-            return "redirect:/";
-        }
-        List<Bootcamp> bootcamps = bootcampService.getAllBootcamps();
-        Collections.reverse(bootcamps);
-        model.addAttribute("bootcamps", bootcamps);
-        return "teachermain";
-    }
 
     // Teachers Page and Add Teacher
     @GetMapping("/teachers")
@@ -86,8 +76,7 @@ public class AdminController {
             List<User> teachers = roleService.getAllTeachers();
             model.addAttribute("teachers", teachers);
             return "teacher_add_table";
-        }
-        else {
+        } else {
             Role teacherRole = roleService.getDepartmentById(2L);
             newTeacher.getRoles().add(teacherRole);
             userService.registerUser(newTeacher, bindingResult);
@@ -101,28 +90,28 @@ public class AdminController {
         User user = userService.findById(id);
         model.addAttribute("teacher", user);  // Add teacher to the model for the form
         return "teacher_edit";  // Return the view for editing
-    }    
+    }
 
 
     @GetMapping("/teachers/delete/{id}")
     public String deleteTeacher(@PathVariable Long id) {
-        userService.deleteUserById(id); 
-        return "redirect:/teachers"; 
+        userService.deleteUserById(id);
+        return "redirect:/teachers";
     }
-    
+
     @GetMapping("/accountants/delete/{id}")
     public String deleteAccountant(@PathVariable Long id) {
-        userService.deleteUserById(id); 
-        return "redirect:/accountants"; 
+        userService.deleteUserById(id);
+        return "redirect:/accountants";
     }
 
     @GetMapping("/students/delete/{id}")
     public String deleteStudent(@PathVariable Long id) {
-        studentService.deleteUserById(id); 
-        return "redirect:/students"; 
+        studentService.deleteUserById(id);
+        return "redirect:/students";
     }
 
-    
+
     // Accountant Page and Add
     @GetMapping("/accountants")
     public String accountants(Model model, HttpSession session) {
@@ -144,8 +133,7 @@ public class AdminController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("accountants", roleService.getAllAccountants());
             return "financial_add_table";
-        }
-        else {
+        } else {
             Role accountantRole = roleService.getDepartmentById(3L);
             newAccountant.getRoles().add(accountantRole);
             userService.registerUser(newAccountant, bindingResult);
@@ -180,8 +168,7 @@ public class AdminController {
             List<Student> students = studentService.getAllStudents();
             model.addAttribute("students", students);
             return "student_add_table";
-        }
-        else {
+        } else {
             studentService.addStudent(newStudent);
             return "redirect:/students";
         }
@@ -216,8 +203,7 @@ public class AdminController {
             List<Bootcamp> bootcamps = bootcampService.getAllBootcamps();
             model.addAttribute("bootcamps", bootcamps);
             return "bootcamp_add_table";
-        }
-        else {
+        } else {
             bootcampService.addBootcamp(newBootcamp);
             return "redirect:/bootcamps";
         }
@@ -284,6 +270,8 @@ public class AdminController {
             return "redirect:/certificates";
         }
     }
+
+
     @GetMapping("/bootcamp/{id}")
     public String getBootcampDetails(@PathVariable("id") Long bootcampId, Model model) {
         Bootcamp bootcamp = bootcampService.getBootcamp(bootcampId);
@@ -294,56 +282,6 @@ public class AdminController {
 
         return "bootcampDetails";  // Thymeleaf template name
     }
-
-@GetMapping("/teacher/bootcamp/{id}")
-public String getcertDetails(@PathVariable("id") Long bootcampId, Model model) {
-    Bootcamp bootcamp = bootcampService.getBootcamp(bootcampId);
-    List<Student> students = bootcampService.getStudentsForBootcamp(bootcampId);
-
-    model.addAttribute("bootcamp", bootcamp);
-    model.addAttribute("students", students);
-    
-
-    return "certdetails";  // Thymeleaf template name
 }
-
-}
-
-//
-//    @PostMapping("/certificates/addCertificate")
-//    public String addCertificate(
-//            @Valid @ModelAttribute("newCertificate") Certificate newCertificate,
-//            BindingResult bindingResult,
-//            Model model,
-//            @RequestParam("teacherId") Long teacherId,
-//            @RequestParam("accountantId") Long accountantId
-//    ) {
-//        if (bindingResult.hasErrors()) {
-//            List<Certificate> certificates = certificateService.getAllCertificates();
-//            model.addAttribute("certificates", certificates);
-//            return "certificate_add_table";
-//        }
-//        else {
-//            Approval teacherApproval = new Approval();
-//            Approval accountantApproval = new Approval();
-//            // Find users by ID
-//            User teacher = userService.findById(teacherId);
-//            User accountant = userService.findById(accountantId);
-//            List<Approval> allApprovals = approvalService.getAllApprovals();
-//
-//            approvalService.addNewApprovalToCertificateForTeacher(teacherApproval, teacher);
-//            Approval newTeacherApproval = approvalService.getAllApprovals().get(allApprovals.size() - 1);
-//
-//            approvalService.addNewApprovalToCertificateForFinancial(accountantApproval, accountant);
-//            Approval newAccountantApproval = approvalService.getAllApprovals().get(allApprovals.size() - 1);
-//            certificateService.addCertificate(newCertificate);
-//            List<Certificate> certificates = certificateService.getAllCertificates();
-//            Certificate newAddedCertificate = certificateService.getAllCertificates().get(certificates.size() - 1);
-//            approvalService.assignApprovalToCertificate(newTeacherApproval,newAddedCertificate);
-//            approvalService.assignApprovalToCertificate(newAccountantApproval, newAddedCertificate);
-//            return "redirect:/certificates";
-//        }
-//    }
-
 
 
