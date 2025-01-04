@@ -40,10 +40,12 @@ public class AdminController {
 
     // Admin Dashboard
     @GetMapping("/adminDashboard")
-    public String dashboard(HttpSession session) {
+    public String dashboard(HttpSession session, Model model) {
         if (session.getAttribute("loggedUser") == null) {
             return "redirect:/";
         }
+        List<Bootcamp> allBootcamps = bootcampService.getAllBootcamps();
+        model.addAttribute("bootcamps", allBootcamps);
         return "adminDashboard";
     }
 
