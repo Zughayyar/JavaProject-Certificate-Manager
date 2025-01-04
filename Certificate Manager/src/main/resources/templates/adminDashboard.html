@@ -61,13 +61,18 @@
         <div class="container">
             <div class="title">Latest Bootcamps</div>
             <div class="card-container">
-                <div class="card">
-                    <img src="https://storage.googleapis.com/a1aa/image/nutUnKUfbU2AJqZLeLc8X5J1JeLbnMsKzoluWJlssHaudxAoA.jpg" alt="Bootcamp 1" class="card-image">
-                    <div class="card-content">
-                        <div class="card-title">Card Title 1</div>
-                        <div class="card-subtitle">Card Subtitle 1</div>
-                        <div class="card-buttons">
-                            <button>Certificate Details</button>
+                <th:block th:each="bootcamp, iterStat : ${bootcamps}">
+                    <th:block th:if="${iterStat.index < 3}">
+                        <div class="card">
+                            <img src="https://storage.googleapis.com/a1aa/image/nutUnKUfbU2AJqZLeLc8X5J1JeLbnMsKzoluWJlssHaudxAoA.jpg"
+                                 alt="Bootcamp" class="card-image">
+                            <div class="card-content">
+                                <div class="card-title" th:text="${bootcamp.bootcampName}"></div>
+                                <div class="card-subtitle" th:text="${bootcamp.description}"></div>
+                                <div class="card-buttons">
+                                    <a th:href="@{'/bootcamp/' + ${bootcamp.id}}" class="btn-details">Bootcamp Details</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -96,5 +101,6 @@
             </div>
         </div>
     </main>
+    
 </body>
 </html>
