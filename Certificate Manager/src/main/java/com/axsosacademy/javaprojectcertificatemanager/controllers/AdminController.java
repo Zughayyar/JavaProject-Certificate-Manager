@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+
 @Controller
 public class AdminController {
 
@@ -306,6 +307,13 @@ public class AdminController {
 
         return "bootcampDetails";  // Thymeleaf template name
     }
+    @RequestMapping("/usersDetails")
+    public String requestMethodName(@RequestParam(value = "param", defaultValue = "defaultValue") String param, Model model) {
+        model.addAttribute("param", param);
+        return "usersDetails"; // Make sure this is the view name
+    }
+    
+    
 }
 
 
