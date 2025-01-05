@@ -66,7 +66,7 @@
                         <tbody>
                         <tr th:each="certificate : ${bootcamp.certificates}" >
                             <td th:text="${certificate.uniqueID}" ></td>
-                            <td th:text="${certificate.students.get(0).firstName} + ${certificate.students.get(0).lastName} "></td>
+                            <td th:text="${certificate.students.get(0).firstName} +' '+ ${certificate.students.get(0).lastName}"></td>
                             <td>
                                 <form th:action="@{/accountant/bootcamp/{id}/certificate/update(id=${bootcamp.id})}" method="post" class="me-3">
                                     <input type="hidden" name="approvalId" th:value="${certificate.approvalList.get(1).getId()}">

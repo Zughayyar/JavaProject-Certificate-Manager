@@ -32,15 +32,15 @@
 </header>
 
 <!-- Sidebar Section -->
-<aside class="sidebar bg-dark text-white p-3">
-    <nav class="nav flex-column">
-        <a href="/teacherDashboard" class="nav-link active text-white"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-    </nav>
+<aside class="sidebar">
+    <a href="/teacherDashboard" class="active">
+        <i class="fas fa-tachometer-alt"></i>
+        Dashboard
+    </a>
 </aside>
 
 <main class="content">
     <div class="container">
-        <!-- Back Button Section -->
         <a href="/teacherDashboard" class="btn btn-primary mb-3"><i class="fas fa-arrow-left"></i> Back to Teacher Dashboard</a>
 
 
@@ -67,7 +67,7 @@
                 <tbody>
                     <tr th:each="certificate : ${bootcamp.certificates}" >
                         <td th:text="${certificate.uniqueID}" ></td>
-                        <td th:text="${certificate.students.get(0).firstName} + ${certificate.students.get(0).lastName} "></td>
+                        <td th:text="${certificate.students.get(0).firstName} +' '+ ${certificate.students.get(0).lastName} "></td>
                         <td>
                             <form th:action="@{/teacher/bootcamp/{id}/certificate/update(id=${bootcamp.id})}" method="post" class="me-3">
                                 <input type="hidden" name="approvalId" th:value="${certificate.approvalList.get(0).getId()}">
