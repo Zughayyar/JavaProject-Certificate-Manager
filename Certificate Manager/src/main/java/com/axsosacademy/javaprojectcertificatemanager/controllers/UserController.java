@@ -20,9 +20,9 @@ public class UserController {
 
     @GetMapping("/usersDetails")
     public String usersDetails(Model model) {
-        List<User> users = userService.getAllUsersWithRoles();
+        List<User> usersWithRoles = userService.getAllUsersWithRoles();
         List<Object[]> usersDetails = userService.getUsersAndRolesDetails();
-        model.addAttribute("users", users);
+        model.addAttribute("usersWithRoles", usersWithRoles);
         model.addAttribute("usersDetails", usersDetails);
         return "usersDetails";
     }
