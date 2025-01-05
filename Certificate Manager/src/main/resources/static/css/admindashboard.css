@@ -137,6 +137,7 @@ body {
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     min-height: 100vh;
+    
 }
 
 button {
@@ -258,7 +259,7 @@ button:hover {
     font-weight: bold;
     color: #5b3c6f;
     margin-bottom: 25px;
-    text-align: left;
+    text-align: center;
 }
 
 /* Bootcamp Table Styling */

@@ -53,11 +53,17 @@ body {
     background-color: #691489;
     color: white;
     height: 100vh;
-    padding-top: 20px;
+    padding-top: 10px;
     position: fixed;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
 }
- 
+
+.sidebar-links {
+    flex-grow: 1;
+}
+
 .sidebar a {
     display: block;
     color: white;
@@ -68,19 +74,19 @@ body {
     border-left: 3px solid transparent;
     transition: background-color 0.3s, border-left 0.3s;
 }
- 
+
 .sidebar a:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-left: 3px solid #ffffff;
 }
- 
+
 .sidebar a.active {
     background-color: #ffffff;
     color: #691489;
     border-left: 3px solid #ffffff;
     font-weight: bold;
 }
- 
+
 .sidebar a i {
     margin-right: 10px;
 }
@@ -228,41 +234,46 @@ p {
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #fff;
-    margin-top: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
+    margin-top: 10px;
+    background-color: #fff; /* Consistent background color */
+    border-radius: 8px; /* Rounded corners for the table */
+    overflow: hidden; /* Ensures rounded corners are effective */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 th, td {
-    padding: 12px 18px;
-    text-align: left;
-    border-bottom: 1px solid #e0e0e0;
+    padding: 12px; /* Increased padding for better spacing */
+    text-align: left; /* Align text to the left */
+    border-bottom: 1px solid #ddd; /* Light border between rows */
+    font-size: 14px; /* Consistent font size */
+    color: #292727; /* Dark text color */
 }
 
 th {
-    background-color: #691489;
-    color: #fff;
-    font-weight: 600;
+    background-color: #691489; /* Header background color */
+    color: #f2f2f2; /* Light text color for contrast */
+    font-size: 16px; /* Slightly larger font for headers */
+    font-weight: bold; /* Make headers stand out */
+    text-transform: uppercase; /* Capitalize headers for emphasis */
 }
 
-td {
-    color: #555;
-    font-size: 15px;
-    transition: background-color 0.3s ease;
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternating row color */
 }
 
-tr:hover td {
-    background-color: #f4f6f9;
+tr:hover {
+    background-color: #f2f2f2; /* Highlight row on hover */
+    cursor: default; /* Neutral cursor for table rows */
 }
 
-tr:nth-child(even) td {
-    background-color: #f9f9f9;
+td:first-child, th:first-child {
+    padding-left: 20px; /* Extra padding for the first column */
 }
 
-tbody tr:last-child td {
-    border-bottom: none;
+td:last-child, th:last-child {
+    padding-right: 20px; /* Extra padding for the last column */
 }
+
 
 /* Back Button Styling */
 .btn {
@@ -308,4 +319,66 @@ section h2 {
     margin: 0 auto;
     text-align: center;
     flex-grow: 1; /* Ensures it takes available space in the header */
+}
+/* Hide the default checkbox */
+.form-check-input {
+    appearance: none; /* Remove default checkbox styling */
+    width: 20px;
+    height: 20px;
+    background-color: #f2f2f2; /* Default background color */
+    border: 2px solid #691489; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Checkmark styles */
+.form-check-input:checked {
+    background-color: #691489; /* Background color when checked */
+    border-color: #691489; /* Match border color */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='2' d='M4 8l3 3 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%; /* Adjust checkmark size */
+}
+
+
+/* Focus effect */
+.form-check-input:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 5px rgba(105, 20, 137, 0.5); /* Purple glow on focus */
+}
+
+/* Disabled state */
+.form-check-input:disabled {
+    background-color: #ddd; /* Gray background */
+    border-color: #bbb; /* Light gray border */
+    cursor: not-allowed; /* Change cursor to indicate disabled */
+    opacity: 0.6; /* Make it semi-transparent */
+}
+/* Container for the text and checkbox */
+.approval-checkbox-container {
+    display: flex;
+    align-items: center; /* Aligns the text and checkbox vertically */
+    gap: 8px; /* Adds spacing between the text and checkbox */
+}
+
+/* Style for the approval status text */
+.approval-status {
+    font-size: 14px;
+    color: #292727;
+    font-weight: bold; /* Makes the text bold */
+}
+
+/* Style for the checkbox */
+.form-check-input {
+    width: 24px; /* Increases the width of the checkbox */
+    height: 24px; /* Increases the height of the checkbox */
+    accent-color: #691489; /* Sets the custom color for supported browsers */
+    cursor: pointer; /* Ensures it stays clickable */
+}
+.form-check-input:hover {
+    box-shadow: 0 0 5px rgba(105, 20, 137, 0.5); /* Adds a slight glow on hover */
 }

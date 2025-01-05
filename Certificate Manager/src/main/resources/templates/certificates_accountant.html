@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Financial</title>
+    <title>Accountant Certificate</title>
     <link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
     <link rel="stylesheet" href="/css/bootcampdetails.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -14,6 +14,10 @@
         <div class="left">
             <img src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png" alt="Site logo">
         </div>
+        <div class="dashboard-title">
+		    <span>Accountant Dashboard</span>
+		</div>
+		
         <div class="right d-flex align-items-center">
             <span th:text="${session.loggedUser.getFirstName()}"></span>
             <span th:text="${session.loggedUser.getLastName()}"></span>
@@ -62,14 +66,16 @@
                         <tbody>
                         <tr th:each="certificate : ${bootcamp.certificates}" >
                             <td th:text="${certificate.uniqueID}" ></td>
-                            <td th:text="${certificate.students.get(0).firstName} + ${certificate.students.get(0).lastName} "></td>
+                            <td th:text="${certificate.students.get(0).firstName} +' '+ ${certificate.students.get(0).lastName}"></td>
                             <td>
                                 <form th:action="@{/accountant/bootcamp/{id}/certificate/update(id=${bootcamp.id})}" method="post" class="me-3">
                                     <input type="hidden" name="approvalId" th:value="${certificate.approvalList.get(1).getId()}">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="status" onchange="this.form.submit()" th:checked="${certificate.approvalList.get(1).approvalStatus}" >
+                                    <div class="approval-checkbox-container">
+                                        <span class="approval-status" th:text="${certificate.approvalList.get(1).approvalStatus ? 'Pass' : 'Not Pass'}"></span>
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="status" onchange="this.form.submit()" th:checked="${certificate.approvalList.get(1).approvalStatus}">
+                                    </div>
                                 </form>
-                                <span th:text="${certificate.approvalList.get(1).approvalStatus ? 'Pass' : 'Not Pass'}" ></span>
-                            </td>
+                            </td>                            
                         </tr>
                         </tbody>
                     </table>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Teacher Dashboard</title>
     <link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="/css/admindashboard.css">
@@ -54,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="bootcamp : ${bootcamps}">
+                    <tr th:each="bootcamp : ${availableBootcamps}">
                         <td>
                             <a th:href="@{'/teacher/bootcamp/' + ${bootcamp.id}}" class="bootcamp-link" th:text="${bootcamp.bootcampName}"></a>
                         </td>
@@ -62,7 +62,8 @@
                         <td th:text="${#dates.format(bootcamp.startDate,'dd-MM-yyyy')}"></td>
                         <td th:text="${#dates.format(bootcamp.endDate,'dd-MM-yyyy')}"></td>
                     </tr>
-                </tbody>
+                </tbody>                
+                
             </table>
         </div>
     </main>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -92,12 +93,14 @@ public class AdminController {
         return "teacher_edit";  // Return the view for editing
     }
 
+    @PostMapping("/teachers/edit")
 
     @GetMapping("/teachers/delete/{id}")
     public String deleteTeacher(@PathVariable Long id) {
         userService.deleteUserById(id);
         return "redirect:/teachers";
     }
+        
 
     @GetMapping("/accountants/delete/{id}")
     public String deleteAccountant(@PathVariable Long id) {
@@ -215,21 +218,37 @@ public class AdminController {
         if (session.getAttribute("loggedUser") == null) {
             return "redirect:/";
         }
+    
+        List<Student> allStudents = studentService.getAllStudents();
         List<Certificate> certificates = certificateService.getAllCertificates();
-        List<Student> students = studentService.getAllStudents();
+    
+
+        List<Student> assignedStudents = certificates.stream()
+                .flatMap(certificate -> certificate.getStudents().stream())  
+                .distinct()  
+                .collect(Collectors.toList());
+    
+        List<Student> availableStudents = allStudents.stream()
+                .filter(student -> !assignedStudents.contains(student))
+                .collect(Collectors.toList());
+    
         List<Bootcamp> bootcamps = bootcampService.getAllBootcamps();
         List<Approval> approvals = approvalService.getAllApprovals();
         List<User> teachers = roleService.getAllTeachers();
         List<User> accountants = roleService.getAllAccountants();
+    
         model.addAttribute("certificates", certificates);
-        model.addAttribute("students", students);
+        model.addAttribute("students", availableStudents);  
         model.addAttribute("bootcamps", bootcamps);
         model.addAttribute("approvals", approvals);
         model.addAttribute("teachers", teachers);
         model.addAttribute("accountants", accountants);
         model.addAttribute("newCertificate", new Certificate());
+    
         return "certificate_add_table";
     }
+    
+
 
 
     @PostMapping("/certificates/addCertificate")

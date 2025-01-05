@@ -75,14 +75,14 @@
                     <input type="password" id="confirmPassword" th:field="*{confirmPassword}" class="form-control" placeholder="Confirm Password">
                     <div th:if="${#fields.hasErrors('confirmPassword')}" class="text-danger" th:errors="*{confirmPassword}"></div>
                 </div>
-                <input type="submit" class="btn btn-primary">
+                <input value="submit" type="submit" class="btn btn-primary">
             </form>
         </div>
 
         <!-- Table Section -->
         <div class="table-container">
             <h2>All Accountants</h2>
-            <table class="table table-bordered text-center">
+            <table class="table table-bordered text-center" border=1>
                 <thead class="table-dark">
                 <tr>
                     <th>First Name</th>
@@ -99,7 +99,6 @@
                     <td th:text="${accountant.email}"></td>
                     <td th:text="${accountant.phoneNumber}"></td>
                     <td>
-                        <a th:href="@{/accountants/edit/{id}(id=${accountant.id})}" class="btn btn-warning btn-sm">Edit</a>
                         <a th:href="@{/accountants/delete/{id}(id=${accountant.id})}" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>

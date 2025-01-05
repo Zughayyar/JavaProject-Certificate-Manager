@@ -47,7 +47,7 @@
             </a>
             <a href="/accountants">
                 <i class="fas fa-file-invoice-dollar"></i>
-                financials
+                Financials
             </a>
             <a href="/bootcamps">
                 <i class="fas fa-laptop-code"></i>
@@ -68,16 +68,16 @@
                 <div class="select_element">
                     <label for="studentSelect">Add Student</label>
                     <select id="studentSelect" th:field="*{students}">
-                        <option value="" disabled selected>Select a student</option>
+                        <option value="" selected>Select a student</option>
                         <th:block th:each="student : ${students}">
                             <option th:value="${student.id}" th:text="${student.firstName + ' ' + student.lastName}"></option>
                         </th:block>
                     </select>
-                </div>
+                </div>                
                 <div class="select_element">
                     <label for="bootcampSelect">Add Bootcamp</label>
                     <select id="bootcampSelect" th:field="*{bootcamps}">
-                        <option value="" disabled selected>Select a bootcamp</option>
+                        <option value=""  selected>Select a bootcamp</option>
                         <th:block th:each="bootcamp : ${bootcamps}">
                             <option th:value="${bootcamp.id}" th:text="${bootcamp.bootcampName}"></option>
                         </th:block>
@@ -107,14 +107,15 @@
         </div>
         <div class="table-container">
             <label>All Certificate</label>
-            <table class="text-center">
+            <table class="text-center" border=1>
                 <thead>
                     <tr>
                         <th>Certificate Id</th>
                         <th>Student Name</th>
                         <th>Bootcamp Name</th>
-                        <th>Detailed Status</th>
-                        <th>Certificate Final Status</th>
+                        <th>Teacher Status</th>
+                        <th>Financial Status</th>
+                        <th>Certificate Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,18 +123,14 @@
                         <td th:text="${certificate.uniqueID}" ></td>
                         <td th:text="${certificate.students.get(0).firstName} + ${certificate.students.get(0).lastName} "></td>
                         <td th:text="${certificate.bootcamps.get(0).bootcampName}"></td>
-                       <td>
-						    <ul class="approval-list">
-						        <li th:each="approval : ${approvals}"
+						        <td th:each="approval : ${approvals}"
 						            th:if="${approval.certificate != null and approval.certificate.id == certificate.id}" 
 						            class="approval-item">
 						            <span class="approval-text" 
-						                  th:text="${approval.user.roles.get(0).getRoleName() + ' (' + approval.user.firstName + ' ' + approval.user.lastName + '): ' + (approval.approvalStatus ? 'Pass' : 'Not Pass')}"></span>
-						        </li>
-						    </ul>
-					  </td>
+                                    th:text="${approval.user.firstName  + ': ' + (approval.approvalStatus ? 'Pass' : 'Not Pass')}"></span>
+                                </td>
 					  <td>
-						    <span th:if="${!certificate.getCertificateStatus()}" class="certificate-status not-ready">Certificate not ready</span>
+						    <span th:if="${!certificate.getCertificateStatus()}" class="certificate-status not-ready">not ready</span>
 						    <span th:if="${certificate.getCertificateStatus()}" class="certificate-status ready">Certificate ready</span>
 					  </td>
                     </tr>

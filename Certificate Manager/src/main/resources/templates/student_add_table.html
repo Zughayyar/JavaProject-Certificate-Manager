@@ -84,13 +84,13 @@
                     </div>
                 </div>
         
-                <input type="submit" class="btn btn-primary">
+                <input value="submit" type="submit" class="btn btn-primary">
             </form>
         </div>
         
         <div class="table-container">
             <h2>All Students</h2>
-            <table class="table table-bordered text-center">
+            <table class="table table-bordered text-center" border=1>
                 <thead class="table-dark">
                 <tr>
                     <th>First Name</th>
@@ -109,7 +109,6 @@
                     <td th:text="${student.phoneNumber}"></td>
                     <td th:text="${student.address}"></td>
                     <td>
-                        <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-warning btn-sm">Edit</a>
                         <a th:href="@{/students/delete/{id}(id=${student.id})}" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>
