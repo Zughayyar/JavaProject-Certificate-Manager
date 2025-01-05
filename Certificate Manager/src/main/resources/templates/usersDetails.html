@@ -29,48 +29,36 @@
 <!-- Sidebar Section -->
 <aside class="sidebar bg-dark text-white p-3">
     <nav class="nav flex-column">
-        <a href="/adminDashboard" class="nav-link active text-white"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="/adminDashboard" ><i class="fas fa-tachometer-alt"></i> Dashboard</a>
         <a href="/teachers" class="nav-link text-white"><i class="fas fa-chalkboard-teacher"></i> Teachers</a>
         <a href="/students" class="nav-link text-white"><i class="fas fa-user-graduate"></i> Students</a>
         <a href="/accountants"  class="nav-link text-white"><i class="fas fa-file-invoice-dollar"></i> Financials</a>
         <a href="/bootcamps" class="nav-link text-white"><i class="fas fa-laptop-code"></i> Bootcamp</a>
         <a href="/certificates" class="nav-link text-white"><i class="fas fa-check-square"></i> Certificate</a>
-        <a href="/usersDetails"><i class="fas fa-user"></i>Users Details</a>
+        <a href="/usersDetails" class="nav-link active text-white"><i class="fas fa-user"></i> Certificate</a>
     </nav>
 </aside>
 
 <main class="content">
     <div class="container">
-        <!-- Back Button Section -->
-        <a href="/adminDashboard" class="btn btn-primary mb-3"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
 
 
-        <!-- Bootcamp Details Section -->
-        <section>
-            <h2>Bootcamp Details</h2>
-            <p><strong>Bootcamp Name:</strong> <span th:text="${bootcamp.bootcampName}"></span></p>
-            <p><strong>Description:</strong> <span th:text="${bootcamp.description}"></span></p>
-            <p><strong>Start Date:</strong> <span th:text="${#dates.format(bootcamp.startDate, 'dd-MM-yyyy')}"></span></p>
-            <p><strong>End Date:</strong> <span th:text="${#dates.format(bootcamp.endDate, 'dd-MM-yyyy')}"></span></p>
-        </section>
+
 
         <section>
-            <h2>Students</h2>
+            <h2>Users Details</h2>
             <table border=1>
                 <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
+                        <th>User Name</th>
+                        <th>Role</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="student : ${students}">
-                        <td th:text="${student.firstName}"></td>
-                        <td th:text="${student.lastName}"></td>
-                        <td th:text="${student.email}"></td>
-                        <td th:text="${student.phoneNumber}"></td>
+                    <tr>
+                        <td></td>
+                        <td></td>
+
                     </tr>
                 </tbody>
             </table>
