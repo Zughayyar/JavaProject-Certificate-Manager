@@ -99,4 +99,14 @@ public class UserService {
         }
 
     }
+
+    // Get All Users With Roles
+    public List<User> getAllUsersWithRoles() {
+        return userRepository.joinUsersAndRoles();
+    }
+
+    // get Users and Roles Details
+    public List<Object[]> getUsersAndRolesDetails() {
+        return userRepository.joinUsersAndRolesWithDetails();
+    }
 }
