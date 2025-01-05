@@ -54,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="bootcamp : ${bootcamps}">
+                    <tr th:each="bootcamp : ${availableBootcamps}">
                         <td>
                             <a th:href="@{'/teacher/bootcamp/' + ${bootcamp.id}}" class="bootcamp-link" th:text="${bootcamp.bootcampName}"></a>
                         </td>
@@ -62,7 +62,8 @@
                         <td th:text="${#dates.format(bootcamp.startDate,'dd-MM-yyyy')}"></td>
                         <td th:text="${#dates.format(bootcamp.endDate,'dd-MM-yyyy')}"></td>
                     </tr>
-                </tbody>
+                </tbody>                
+                
             </table>
         </div>
     </main>
