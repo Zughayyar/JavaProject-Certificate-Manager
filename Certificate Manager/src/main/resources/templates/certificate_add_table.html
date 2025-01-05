@@ -111,38 +111,41 @@
         </div>
         <div class="table-container">
             <label>All Certificate</label>
-            <table class="text-center" border=1>
-                <thead>
-                    <tr>
-                        <th>Certificate Id</th>
-                        <th>Student Name</th>
-                        <th>Bootcamp Name</th>
-                        <th>Teacher Status</th>
-                        <th>Financial Status</th>
-                        <th>Certificate Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="certificate : ${certificates}" >
-                        <td th:text="${certificate.uniqueID}" ></td>
-                        <td th:text="${certificate.students.get(0).firstName} + ${certificate.students.get(0).lastName} "></td>
-                        <td th:text="${certificate.bootcamps.get(0).bootcampName}"></td>
-						        <td th:each="approval : ${approvals}"
-						            th:if="${approval.certificate != null and approval.certificate.id == certificate.id}" 
-						            class="approval-item">
-						            <span class="approval-text" 
-                                    th:text="${approval.user.firstName  + ': ' + (approval.approvalStatus ? 'Pass' : 'Not Pass')}"></span>
-                                </td>
-					  <td>
-						    <span th:if="${!certificate.getCertificateStatus()}" class="certificate-status not-ready">not ready</span>
-						    <span th:if="${certificate.getCertificateStatus()}" class="certificate-status ready">Certificate ready</span>
-					  </td>
-                      <td><a th:href="@{/certificates/delete/{id}(id=${certificate.id})}" onclick="return confirm('Are you sure you want to delete this certificate?')">Delete</a></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-wrapper">
+                <table class="text-center" border="1">
+                    <thead>
+                        <tr>
+                            <th>Certificate Id</th>
+                            <th>Student Name</th>
+                            <th>Bootcamp Name</th>
+                            <th>Teacher Status</th>
+                            <th>Financial Status</th>
+                            <th>Certificate Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="certificate : ${certificates}" >
+                            <td th:text="${certificate.uniqueID}" ></td>
+                            <td th:text="${certificate.students.get(0).firstName} + ' '+${certificate.students.get(0).lastName} "></td>
+                            <td th:text="${certificate.bootcamps.get(0).bootcampName}"></td>
+                                    <td th:each="approval : ${approvals}"
+                                        th:if="${approval.certificate != null and approval.certificate.id == certificate.id}" 
+                                        class="approval-item">
+                                        <span class="approval-text" 
+                                        th:text="${approval.user.firstName  + ': ' + (approval.approvalStatus ? 'Pass' : 'Not Pass')}"></span>
+                                    </td>
+                          <td>
+                                <span th:if="${!certificate.getCertificateStatus()}" class="certificate-status not-ready">not ready</span>
+                                <span th:if="${certificate.getCertificateStatus()}" class="certificate-status ready">Certificate ready</span>
+                          </td>
+                          <td><a th:href="@{/certificates/delete/{id}(id=${certificate.id})}" onclick="return confirm('Are you sure you want to delete this certificate?')">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        
     </div>
     </main>
 </body>

@@ -409,3 +409,26 @@ select:hover {
 
 
 
+.table-wrapper {
+    max-height: 400px; /* Adjust height as needed */
+    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-x: auto; /* Enables horizontal scrolling, if needed */
+    border: 1px solid #ccc; /* Optional: Adds a border around the scrollable area */
+}
+
+.table-wrapper table {
+    width: 100%; /* Ensures table fits the container width */
+    border-collapse: collapse; /* Optional: Collapses table borders */
+}
+
+.table-wrapper th, .table-wrapper td {
+    padding: 10px;
+    text-align: left;
+}
+
+.table-wrapper th {
+    background-color: #f9f9f9; /* Optional: Header background color */
+    position: sticky; /* Makes header row stick while scrolling */
+    top: 0; /* Ensures sticky header works */
+    z-index: 2; /* Ensures header stays on top */
+}
