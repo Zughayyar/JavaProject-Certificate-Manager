@@ -2,7 +2,12 @@ package com.axsosacademy.javaprojectcertificatemanager.services;
 
 import com.axsosacademy.javaprojectcertificatemanager.initializers.UniqueIdGenerator;
 import com.axsosacademy.javaprojectcertificatemanager.models.Certificate;
+import com.axsosacademy.javaprojectcertificatemanager.repositories.ApprovalRepository;
 import com.axsosacademy.javaprojectcertificatemanager.repositories.CertificateRepository;
+
+import jakarta.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -14,6 +19,8 @@ public class CertificateService {
     public CertificateService(CertificateRepository certificateRepository) {
         this.certificateRepository = certificateRepository;
     }
+        @Autowired
+    private ApprovalRepository approvalRepository;
 
     // Get All Certificates
     public List<Certificate> getAllCertificates() {
@@ -30,6 +37,14 @@ public class CertificateService {
         String lastCertUniqueId = UniqueIdGenerator.generateUniqueId(lastCertificateId, lastCertificateDate);
         lastCertificate.setUniqueID(lastCertUniqueId);
         certificateRepository.save(lastCertificate);
+    }
+    @Transactional
+    public void deleteCertificateById(Long id) {
+        // Delete all approvals related to the certificate
+        approvalRepository.deleteByCertificateId(id);
+
+        // Delete the certificate
+        certificateRepository.deleteById(id);
     }
 
 }

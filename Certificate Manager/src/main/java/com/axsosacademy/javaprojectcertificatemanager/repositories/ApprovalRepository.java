@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface ApprovalRepository extends CrudRepository<Approval, Long> {
     List<Approval> findAll();
+    void deleteByCertificateId(Long certificateId);
 }
