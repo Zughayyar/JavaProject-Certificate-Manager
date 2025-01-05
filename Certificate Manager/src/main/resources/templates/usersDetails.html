@@ -35,34 +35,71 @@
         <a href="/accountants"  class="nav-link text-white"><i class="fas fa-file-invoice-dollar"></i> Financials</a>
         <a href="/bootcamps" class="nav-link text-white"><i class="fas fa-laptop-code"></i> Bootcamp</a>
         <a href="/certificates" class="nav-link text-white"><i class="fas fa-check-square"></i> Certificate</a>
-        <a href="/usersDetails" class="nav-link active text-white"><i class="fas fa-user"></i> Certificate</a>
+        <a href="/usersDetails" class="nav-link active text-white"><i class="fas fa-user"></i> User Details</a>
     </nav>
 </aside>
 
 <main class="content">
     <div class="container">
 
+        <h1 class="text-center">Users and Their Roles</h1>
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+            <tr>
+                <th>User ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Roles</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Iterate over the usersWithRoles list -->
+            <tr th:each="user : ${usersWithRoles}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.email}"></td>
+                <!-- Iterate over the roles associated with the user -->
+                <td>
+                    <ul>
+                        <li th:each="role : ${user.roles}" th:text="${role.roleName}"></li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h1 class="text-center">Users and Roles Details</h1>
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+            <tr>
+                <th>User ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Role Name</th>
+                <th>Role Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Iterate over the usersWithRoles list -->
+            <tr th:each="record : ${usersDetails}">
+                <!-- Display User Fields -->
+                <td th:text="${record[0].id}"></td>
+                <td th:text="${record[0].firstName}"></td>
+                <td th:text="${record[0].lastName}"></td>
+                <td th:text="${record[0].email}"></td>
+                <!-- Display Role Fields -->
+                <td th:text="${record[1].roleName}"></td>
+                <td th:text="${record[1].roleDescription}"></td>
+            </tr>
+            </tbody>
+        </table>
 
 
 
-        <section>
-            <h2>Users Details</h2>
-            <table border=1>
-                <thead>
-                    <tr>
-                        <th>User Name</th>
-                        <th>Role</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
 
-                    </tr>
-                </tbody>
-            </table>
-        </section>
     </div>
 </main>
 
