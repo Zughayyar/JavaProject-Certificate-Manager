@@ -1,6 +1,9 @@
 package com.axsosacademy.javaprojectcertificatemanager.services;
+import com.axsosacademy.javaprojectcertificatemanager.models.Approval;
 import com.axsosacademy.javaprojectcertificatemanager.models.LoginUser;
+import com.axsosacademy.javaprojectcertificatemanager.models.Role;
 import com.axsosacademy.javaprojectcertificatemanager.models.User;
+import com.axsosacademy.javaprojectcertificatemanager.repositories.ApprovalRepository;
 import com.axsosacademy.javaprojectcertificatemanager.repositories.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -11,8 +14,10 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    public UserService(UserRepository userRepository) {
+    private final ApprovalRepository approvalRepository;
+    public UserService(UserRepository userRepository, ApprovalRepository approvalRepository) {
         this.userRepository = userRepository;
+        this.approvalRepository = approvalRepository;
     }
 
     // Get All Users
@@ -80,7 +85,18 @@ public class UserService {
     }
     
     public void deleteUserById(Long id) {
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            List<Role> roles = user.getRoles();
+            roles.clear();
+            userRepository.save(user);
+            List<Approval> approvals = user.getApprovalList();
+            for (Approval approval : approvals) {
+                approval.setUser(null);
+                approvalRepository.save(approval);
+            }
+            userRepository.deleteById(id);
+        }
 
-}
+    }
 }

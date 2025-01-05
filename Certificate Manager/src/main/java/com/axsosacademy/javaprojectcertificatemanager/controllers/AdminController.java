@@ -95,9 +95,9 @@ public class AdminController {
 
     @PostMapping("/teachers/edit")
 
-    @GetMapping("/teachers/delete/{id}")
-    public String deleteTeacher(@PathVariable Long id) {
-        userService.deleteUserById(id);
+    @GetMapping("/teachers/delete/{teacherId}")
+    public String deleteTeacher(@PathVariable Long teacherId) {
+        userService.deleteUserById(teacherId);
         return "redirect:/teachers";
     }
         
