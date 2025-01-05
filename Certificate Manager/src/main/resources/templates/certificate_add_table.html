@@ -116,6 +116,7 @@
                         <th>Teacher Status</th>
                         <th>Financial Status</th>
                         <th>Certificate Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -133,6 +134,7 @@
 						    <span th:if="${!certificate.getCertificateStatus()}" class="certificate-status not-ready">not ready</span>
 						    <span th:if="${certificate.getCertificateStatus()}" class="certificate-status ready">Certificate ready</span>
 					  </td>
+                      <td><a th:href="@{/certificates/delete/{id}(id=${certificate.id})}" onclick="return confirm('Are you sure you want to delete this certificate?')">Delete</a></td>
                     </tr>
                 </tbody>
             </table>

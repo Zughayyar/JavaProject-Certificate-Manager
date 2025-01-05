@@ -247,7 +247,12 @@ public class AdminController {
     
         return "certificate_add_table";
     }
-    
+    @GetMapping("certificates/delete/{id}")
+    public String deleteCertificate(@PathVariable Long id, Model model) {
+        certificateService.deleteCertificateById(id);
+        return "redirect:/certificates";
+    }
+
 
 
 

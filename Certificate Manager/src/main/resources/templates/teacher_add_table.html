@@ -91,7 +91,6 @@
 					<th>Last Name</th>
 					<th>Email</th>
 					<th>Phone Number</th>
-					<th>Actions</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -100,9 +99,7 @@
 					<td th:text="${teacher.lastName}"></td>
 					<td th:text="${teacher.email}"></td>
 					<td th:text="${teacher.phoneNumber}"></td>
-					<td>
-<!--						<a th:href="@{/teachers/delete/{teacherId}(teacherId=${teacher.id})}" class="disabled">Delete</a>-->
-					</td>
+
 				</tr>
 				</tbody>
 			</table>
