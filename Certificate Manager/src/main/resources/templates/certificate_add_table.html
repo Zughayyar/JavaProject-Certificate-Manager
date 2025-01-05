@@ -133,7 +133,7 @@
                                         th:if="${approval.certificate != null and approval.certificate.id == certificate.id}" 
                                         class="approval-item">
                                         <span class="approval-text" 
-                                        th:text="${approval.user.firstName  + ': ' + (approval.approvalStatus ? 'Pass' : 'Not Pass')}"></span>
+                                        th:text="${(approval.approvalStatus ? 'Pass' : 'Not Pass')}"></span>
                                     </td>
                           <td>
                                 <span th:if="${!certificate.getCertificateStatus()}" class="certificate-status not-ready">not ready</span>
